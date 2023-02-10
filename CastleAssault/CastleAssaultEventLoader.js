@@ -6,7 +6,7 @@
 // @email               brunommpreto@disroot.org
 // @description 	    Script to automatically go thru the Castle Assault Event
 // @author		        Bruno Preto (bonobobo#1694)
-// @match               https://*.tribalwars.com.pt/game.php?*village=*&screen=event_assault*
+// @match               https://**.tribalwars.**/game.php?**&screen=event_assault*
 // @version     	    1.0.0
 // @copyright           2023, brunommpreto (https://openuserjs.org/)
 // @license             AGPL-3.0-or-later
@@ -26,6 +26,34 @@
 //*************************** Configuration *****************************/
 
 const DEF_DELAY = 1000;
+const AssaultOptions = ['naval','assault', 'catapult']
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms || DEF_DELAY));
+}
+
+(function () {
+    'use strict';
+    console.log("-- Castle Event Script Started --");
+    DoAssault().then(r => {
+        let msg = "Successfully Performed  " + r  + " Assaults\n" + "Next Assault in 60 minutes."
+        UI.SuccessMessage(msg, 1000);
+    });
+    setInterval(function wait() {
+        location.reload();
+        DoAssault().then(r => {
+            let msg = "Successfully Performed  " + r  + " Assaults\n" + "Next Assault in 60 minutes."
+            UI.SuccessMessage(msg, 1000);
+        });
+    }, 6e10);
+})();
+
+async function DoAssault(){
+    let counter = 0;
+    while ( parseInt($("#assault_energy_display")[0].innerText.split("/")[0].trim())) {
+        document.querySelector('a[data-area=' + AssaultOptions[Math.floor(Math.random() * 3)] + '\]').click();
+        counter++;
+        await sleep(Math.floor(Math.random() * 300) + 100);
+    }
+    return counter;
 }

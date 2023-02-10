@@ -11,7 +11,7 @@
 // @copyright           2023, brunommpreto (https://openuserjs.org/)
 // @license             AGPL-3.0-or-later
 // @supportURL          https://github.com/Tribalwars-Scripts/
-// @updateURL           https://raw.githubusercontent.com/Tribalwars-Scripts/Events/CastleAssault/CastleAssaultEventLoader.user.js
+// @updateURL           https://github.com/Tribalwars-Scripts/Events/raw/main/CastleAssault/CastleAssaultEventLoader.user.js
 // @grant               GM_getResourceText
 // @grant               GM_addStyle
 // @grant               GM_getValue

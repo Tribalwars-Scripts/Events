@@ -7,7 +7,7 @@
 // @description 	    Script to automatically go thru the Castle Assault Event
 // @author		        Bruno Preto (bonobobo#1694)
 // @include             https://**.tribalwars.**/game.php?**&screen=event_assault
-// @version     	    1.0.2
+// @version     	    1.0.3
 // @copyright           2023, brunommpreto (https://openuserjs.org/)
 // @license             AGPL-3.0-or-later
 // @supportURL          https://github.com/Tribalwars-Scripts/
@@ -20,8 +20,9 @@
 // @require             http://code.jquery.com/jquery-1.12.4.min.js
 // ==/UserScript==
 
-const Cangelog = {
-    "1.0.2" : "Added a few things to avoid performing a lot of requests to TW server"
+const Changelog = {
+    "1.0.2" : "Added a few things to avoid performing a lot of requests to TW server",
+    "1.0.3" : "minor fix"
 }
 
 /***************************** Configuration ***************************
@@ -40,21 +41,22 @@ function getMilliseconds(hrs, min, sec) {
     return ((hrs * 60 * 60 + min * 60 + sec) * 1000);
 }
 
-(function () {
+(async function () {
     'use strict';
     console.log("-- Castle Event Script Started --");
-    console.log(Cangelog["1.0.2"])
+    console.log(Changelog["1.0.3"])
+    await sleep(3e3)
     DoAssault().then(r => {
-        let msg = "Successfully Performed  " + r  + " Assaults\n" + "Next Assault in 60 minutes."
+        let msg="Successfully Performed  " + r + " Assaults\n" + "Next Assault in 60 minutes."
         UI.SuccessMessage(msg, 1000);
     });
-    setInterval(function wait() {
+    setInterval(function () {
         location.reload();
         DoAssault().then(r => {
-            let msg = "Successfully Performed  " + r  + " Assaults\n" + "Next Assault in 60 minutes."
+            let msg="Successfully Performed  " + r + " Assaults\n" + "Next Assault in 60 minutes."
             UI.SuccessMessage(msg, 1000);
         });
-    }, getMilliseconds(1,0,0));
+    }, getMilliseconds(1, 0, 0));
 })();
 
 async function DoAssault(){

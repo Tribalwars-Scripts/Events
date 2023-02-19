@@ -7,7 +7,7 @@
 // @description 	    Script to automatically go thru the Castle Assault Event
 // @author		        Bruno Preto (bonobobo#1694)
 // @include             https://**.tribalwars.**/game.php?**&screen=event_assault
-// @version     	    1.0.3
+// @version     	    1.0.4
 // @copyright           2023, brunommpreto (https://openuserjs.org/)
 // @license             AGPL-3.0-or-later
 // @supportURL          https://github.com/Tribalwars-Scripts/
@@ -18,28 +18,23 @@
 // @grant               unsafeWindow
 // @run-at              document-end
 // @require             http://code.jquery.com/jquery-1.12.4.min.js
+// @require             https://raw.githubusercontent.com/Tribalwars-Scripts/Essentials/main/Defaults/helpers.min.js
 // ==/UserScript==
 
-const Changelog = {
-    "1.0.2" : "Added a few things to avoid performing a lot of requests to TW server",
-    "1.0.3" : "minor fix"
+import { sleep, getMilliseconds } from './helpers.min.js';
+
+const Changelog={
+    "1.0.2": "Added a few things to avoid performing a lot of requests to TW server", "1.0.3": "minor fix"
 }
 
 /***************************** Configuration ***************************
 
  This is deprecated, make use of the UI instead
 
-//*************************** Configuration *****************************/
+ //*************************** Configuration *****************************/
 
-const DEF_DELAY = 1000;
-const AssaultOptions = ['naval','assault', 'catapult']
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms || DEF_DELAY));
-}
-function getMilliseconds(hrs, min, sec) {
-    return ((hrs * 60 * 60 + min * 60 + sec) * 1000);
-}
+const AssaultOptions=[ 'naval', 'assault', 'catapult' ]
 
 (async function () {
     'use strict';
@@ -59,9 +54,9 @@ function getMilliseconds(hrs, min, sec) {
     }, getMilliseconds(1, 0, 0));
 })();
 
-async function DoAssault(){
-    let counter = 0;
-    while ( parseInt($("#assault_energy_display")[0].innerText.split("/")[0].trim())) {
+async function DoAssault() {
+    let counter=0;
+    while (parseInt($("#assault_energy_display")[0].innerText.split("/")[0].trim())) {
         document.querySelector('a[data-area=' + AssaultOptions[Math.floor(Math.random() * 3)] + '\]').click();
         counter++;
         await sleep(Math.floor(Math.random() * 300) + 100);

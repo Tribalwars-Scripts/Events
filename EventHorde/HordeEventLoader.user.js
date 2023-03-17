@@ -7,7 +7,7 @@
 // @description 	    Script to automatically go thru the Horde Event
 // @author		        Bruno Preto (bonobobo#1694)
 // @include             https://**.tribalwars.**/game.php?**&screen=event_horde**
-// @version     	    1.0.3
+// @version     	    1.0.4
 // @copyright           2023, brunommpreto (https://openuserjs.org/)
 // @license             AGPL-3.0-or-later
 // @supportURL          https://github.com/Tribalwars-Scripts/
@@ -30,7 +30,8 @@ const Changelog={
 	"1.0.0": "Initial Script",
 	"1.0.1": "Fixed Subarray bug",
 	"1.0.2": "Now it takes into account the blacklisted array",
-	"1.0.3": "Minor bug in starting a new puzzle"
+	"1.0.3": "Minor bug in starting a new puzzle",
+	"1.0.4": "Something up"
 }
 
 /***************************** Configuration ***************************
@@ -63,13 +64,6 @@ const UnitsSlots = () =>{
 };
 
 const remainingSlots=(DefaultUnits, Blacklisted) => {
-	console.group("Calculating the diferences between the two arrays")
-	if (Blacklisted.length === 0){
-		console.debug("Disabled Units is a empty array => 1ºs time running the Script")
-	}else{
-		console.debug("Disabled Units is not an empty array;")
-	}
-	console.groupEnd();
 	return (Blacklisted.length > 0 ) ? ( DefaultUnits.map((unitSlots, i) => {
 		const blacklist = Blacklisted[i] || []; // Handle case where no blacklist is provided
 		return unitSlots.filter((unit) => !blacklist.includes(unit));
@@ -113,13 +107,13 @@ const FillSlots = async(_Units) => {
 	console.debug("Going into sleeping mode for " + 3e3 + 'ms')
 	await sleep(3e3);
 	DoHording().then(r => {
-		UI.BanneredRewardMessage('Used ' + r + ' Attackplans. Next Attack in 60 minutes.', 1000);
+		UI.BanneredRewardMessage('Used ' + r + ' Attackplans.\n Next Attack in 60 minutes.', 5e3);
 	});
 	setInterval(function () {
 		location.reload();
 		DoHording().then(r => {
 
-			UI.BanneredRewardMessage('Used ' + r + ' Attackplans. Next Attack in 60 minutes.', 1000);
+			UI.BanneredRewardMessage('Used ' + r + ' Attackplans.\n Next Attack in 60 minutes.', 5e3);
 
 		});
 	}, getMilliseconds(1, 0, 0));
@@ -136,7 +130,7 @@ async function DoHording() {
 		if (document.getElementsByClassName('horde-slot horde-red-border horde-green').length === 5) {
 			console.info('Puzzle finished ! ');
 			console.debug('Checking if there\'s enough energy to start a new one.')
-			if (getEnergy() - 2) {
+			if ((getEnergy() - 2) > 0) {
 				EventHorde.startNewPuzzle();
 				console.info('New Puzzle created.')
 			}

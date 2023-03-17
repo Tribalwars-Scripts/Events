@@ -7,7 +7,7 @@
 // @description 	    Script to automatically go thru the Horde Event
 // @author		        Bruno Preto (bonobobo#1694)
 // @include             https://**.tribalwars.**/game.php?**&screen=event_horde**
-// @version     	    1.0.2
+// @version     	    1.0.3
 // @copyright           2023, brunommpreto (https://openuserjs.org/)
 // @license             AGPL-3.0-or-later
 // @supportURL          https://github.com/Tribalwars-Scripts/
@@ -29,7 +29,8 @@ const EventName=match[0];
 const Changelog={
 	"1.0.0": "Initial Script",
 	"1.0.1": "Fixed Subarray bug",
-	"1.0.2": "Now it takes into account the blacklisted array"
+	"1.0.2": "Now it takes into account the blacklisted array",
+	"1.0.3": "Minor bug in starting a new puzzle"
 }
 
 /***************************** Configuration ***************************
@@ -135,7 +136,7 @@ async function DoHording() {
 		if (document.getElementsByClassName('horde-slot horde-red-border horde-green').length === 5) {
 			console.info('Puzzle finished ! ');
 			console.debug('Checking if there\'s enough energy to start a new one.')
-			if (!(getEnergy() % 2)) {
+			if (getEnergy() - 2) {
 				EventHorde.startNewPuzzle();
 				console.info('New Puzzle created.')
 			}

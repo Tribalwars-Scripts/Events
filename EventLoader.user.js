@@ -39,7 +39,7 @@ const Changelog_Loader={
 
 $.ajax({
 	type: 'GET',
-	url: 'https://rawcdn.githack.com/Tribalwars-Scripts/Events/main/UILoader/default.js?min=1',
+	url: 'https://rawcdn.githack.com/Tribalwars-Scripts/Events/main/UILoader/default.js',
 	dataType: 'script',
 	cache: false,
 });

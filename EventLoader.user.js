@@ -53,6 +53,7 @@ $.ajax({
 	console.log(Changelog_Loader[lastVersion]);
 	console.debug("Going into sleeping mode for " + 3e3 + 'ms')
 	await sleep(3e3);
+
 	setInterval(function () {
 		location.reload();
 	}, getMilliseconds(1, 0, 0));

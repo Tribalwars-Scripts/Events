@@ -276,6 +276,7 @@ resetPrefsButton.textContent = "Reset Settings";
 let startButton = document.createElement("button");
 startButton.id = UIIds.startButtonId;
 startButton.classList.add("btn");
+startButton.classList.add("btn-disabled");
 startButton.style.margin = "4px";
 startButton.textContent = "Start";
 

@@ -27,7 +27,7 @@ const regex=/(?<=event_).*/;
 const match = EventScreen.match(regex);
 const EventName = match[0];
 
-const Changelog={
+const Changelog_Loader={
 	"1.0.0": "Initial Script Loader",
 }
 
@@ -44,8 +44,8 @@ const Changelog={
 	console.info('%cScript made by - Bonobobo', 'font-family: Orbitron; font-size: 12em; color: #FF6F00; text-shadow:' +
 		' 2px 2px 0' +
 		' #F8D210, 4px 4px 0 #FFAA00, 6px 6px 0 #FF8C00, 8px 8px 0 #FF6F00, 10px 10px 0 #FF5100, 12px 12px 0 #E40000, 14px 14px 0 #C70000, 16px 16px 0 #AA0000;')
-	const lastVersion = Object.keys(Changelog)[Object.keys(Changelog).length - 1];
-	console.log(Changelog[lastVersion]);
+	const lastVersion = Object.keys(Changelog_Loader)[Object.keys(Changelog_Loader).length - 1];
+	console.log(Changelog_Loader[lastVersion]);
 	console.debug("Going into sleeping mode for " + 3e3 + 'ms')
 	await sleep(3e3);
 	setInterval(function () {

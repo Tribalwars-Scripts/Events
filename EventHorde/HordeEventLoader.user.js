@@ -86,11 +86,11 @@ const FillSlots = async(_Units) => {
 		$('#horde_attempt')[0][i].value = unit;
 		// console.debug("Fixed Unit for the Slot_" + i.toString() + " : " + $('#horde_attempt')[0][i].value);
 		data.push($('#horde_attempt')[0][i].value)
-		await sleep(3e2);
+		await sleep(7e2);
 	}
 	console.debug("Submitting the array: ");
 	console.dir(data)
-	await sleep(5e2);
+	await sleep(7e2);
 	EventHorde.submitAttempt();
 	console.groupEnd();
 };
@@ -139,7 +139,7 @@ async function DoHording() {
 		}
 		else {
 			await FillSlots(UnitsSlots());
-			await sleep(5e2);
+			await sleep(7e2);
 		}
 	}
 	return snapshotE;

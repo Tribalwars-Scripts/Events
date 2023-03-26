@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name                Tribalwars Event Loader
+// @name                TribalWars Event Loader - Beta Version
 // @namespace           @brunommpreto[bonobobo]
 // @icon                https://cdn.discordapp.com/avatars/432864216647598100/5af82b694e245c96aa31f9c3ac12fcfa.webp
 // @website             https://www.brunommpreto.github.io/
@@ -7,7 +7,7 @@
 // @description 	    Script to automatically go thru any TribalWars Event
 // @author		        Bruno Preto (bonobobo#1694)
 // @include             https://**.tribalwars.**/game.php?**&screen=event_**
-// @version     	    1.0.1
+// @version     	    1.0.2
 // @copyright           2023, brunommpreto (https://openuserjs.org/)
 // @license             AGPL-3.0-or-later
 // @supportURL          https://github.com/Tribalwars-Scripts/
@@ -19,7 +19,6 @@
 // @run-at              document-end
 // @require             http://code.jquery.com/jquery-1.12.4.min.js
 // @require             https://raw.githubusercontent.com/Tribalwars-Scripts/Essentials/main/Defaults/helpers.min.js
-// @require             https://raw.githubusercontent.com/Tribalwars-Scripts/Events/main/UILoader/default.js
 // ==/UserScript==
 
 const EventScreen=game_data.screen;
@@ -37,7 +36,13 @@ const Changelog_Loader={
 
  //*************************** Configuration *****************************/
 
-// Set up initial variables
+
+$.ajax({
+	type: 'GET',
+	url: 'https://rawcdn.githack.com/Tribalwars-Scripts/Events/f897c69c1a688e81c7eee50a92961fe84e771942/UILoader/default.js?min=1',
+	dataType: 'script',
+	cache: false,
+});
 
 (async function () {
 	'use strict';

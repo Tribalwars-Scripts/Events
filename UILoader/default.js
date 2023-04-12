@@ -363,3 +363,19 @@ function saveLocalStorage(LS_Name, LS2Save) {
 function removeLocalStorage(LS_Name) {
 	localStorage.removeItem(LS_Name)
 }
+
+
+const getEventLoader = async() =>{
+	console.info('Fetching the Event Script from the main repository.');
+	$.ajax({
+		type: 'GET',
+		url: 'https://rawcdn.githack.com/Tribalwars-Scripts/Events/64b056aaa5c32e8352634e5e71cecf0677ea60e3/' + ScriptName.replace(' ','') + '/' + ScriptName.replace(' ','') + 'Loader.js',
+		dataType: 'script',
+		cache: false,
+	});
+
+	//inProgress();
+	console.info(ScriptName + ' Loader successfully fetched.');
+}
+
+await getEventLoader();

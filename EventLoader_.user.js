@@ -33,33 +33,23 @@ const EventName = match[0];
  //*************************** Configuration *****************************/
 
 
-$.ajax({
-	type: 'GET',
-	url: 'https://rawcdn.githack.com/Tribalwars-Scripts/Events/main/UILoader/default.js',
-	dataType: 'script',
-	cache: false,
-});
 
-const getEventLoader = async() =>{
-	console.info('Fetching the Event Script from the main repository.');
+const getUILoader = async() => {
 	$.ajax({
 		type: 'GET',
-		url: 'https://rawcdn.githack.com/Tribalwars-Scripts/Events/64b056aaa5c32e8352634e5e71cecf0677ea60e3/' + ScriptName.replace(' ','') + '/' + ScriptName.replace(' ','') + 'Loader.js',
+		url: 'https://rawcdn.githack.com/Tribalwars-Scripts/Events/main/UILoader/default.js',
 		dataType: 'script',
 		cache: false,
 	});
-
-	//inProgress();
-	console.info(ScriptName + ' Loader successfully fetched.');
 }
 
 (async function () {
 	'use strict';
+	await getUILoader();
 	console.info('%cScript made by - Bonobobo', 'font-family: Orbitron; font-size: 12em; color: #FF6F00; text-shadow:' +
 		' 2px 2px 0' +
 		' #F8D210, 4px 4px 0 #FFAA00, 6px 6px 0 #FF8C00, 8px 8px 0 #FF6F00, 10px 10px 0 #FF5100, 12px 12px 0' +
 		' #E40000, 14px 14px 0 #C70000, 16px 16px 0 #AA0000;');
-	await getEventLoader();
 	const inProgress = () => {
 		const date = new Date('April 13, 2023 04:00:00');
 		// Get the Unix timestamp in seconds by dividing the time value by 1000 to convert from milliseconds to seconds, and then rounding down

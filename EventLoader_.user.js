@@ -55,6 +55,7 @@ $.ajax({
 		dataType: 'script',
 		cache: false,
 	});
+	inProgress();
 	console.info(ScriptName + ' Loader successfully fetched.');
 	console.debug("Going into sleeping mode for " + 3e3 + 'ms');
 	await sleep(3e3);

@@ -88,6 +88,8 @@ const inProgress = () => {
 
 }
 
+console.log("I AM GOD AND U ARE SHIT.");
+
 (async function () {
 	'use strict';
 	const lastVersion = Object.keys(Changelog)[Object.keys(Changelog).length - 1];

@@ -57,7 +57,7 @@ divScript.setAttribute("style", "");
 
 const h4 = document.createElement("h4");
 h4.setAttribute("class", "head with-button ui-sortable-handle");
-h4.innerHTML = '<img style="cursor: pointer;position: absolute;right: 3px;" id="' + UIIds.widgetId + '" src="graphic/minus.png" alt="">' + UIIds.settingsName + '</h4><span style="font-size: 10px; color: DarkSlateGrey;">' + UIIds.versionString + '</span>';
+h4.innerHTML = '<img style="cursor: pointer;position: absolute;right: 3px;" id="' + UIIds.widgetId + '" src="graphic/minus.png" alt="">' + UIIds.settingsName + '</h4><span style="font-size: 10px; color: DarkSlateGrey;">' + UIIds.versionString + '</span><span id="countdown" style="font-size: 12px; color: DarkSlateGrey; position: absolute; right: 25px;"></span>';
 divScript.appendChild(h4);
 
 //left side content

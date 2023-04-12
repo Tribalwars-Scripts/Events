@@ -21,12 +21,6 @@
 // @require             https://raw.githubusercontent.com/Tribalwars-Scripts/Essentials/main/Defaults/helpers.min.js
 // ==/UserScript==
 
-
-const EventScreen=game_data.screen;
-const regex=/(?<=event_).*/;
-const match=EventScreen.match(regex);
-const EventName=match[0];
-
 const Changelog={
 	"1.0.0": "Initial Script",
 }

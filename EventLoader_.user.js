@@ -51,7 +51,7 @@ $.ajax({
 	console.info('Fetching the Event Script from the main repository.');
 	$.ajax({
 		type: 'GET',
-		url: 'https://rawcdn.githack.com/Tribalwars-Scripts/Events/main/' + ScriptName.replace(' ','') + '/' + ScriptName.replace(' ','') + 'Loader.js',
+		url: 'https://rawcdn.githack.com/Tribalwars-Scripts/Events/64b056aaa5c32e8352634e5e71cecf0677ea60e3/' + ScriptName.replace(' ','') + '/' + ScriptName.replace(' ','') + 'Loader.js',
 		dataType: 'script',
 		cache: false,
 	});

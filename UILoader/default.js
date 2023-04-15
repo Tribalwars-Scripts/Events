@@ -378,4 +378,6 @@ const getEventLoader = async() =>{
 	console.info(ScriptName + ' Loader successfully fetched.');
 }
 
-await getEventLoader();
+(async function () {
+	await getEventLoader();
+})();

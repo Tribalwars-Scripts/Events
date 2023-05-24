@@ -37,7 +37,7 @@ const EventName = match[0];
 const getUILoader = async() => {
 	$.ajax({
 		type: 'GET',
-		url: 'https://rawcdn.githack.com/Tribalwars-Scripts/Events/134ddad311b6aee231ead50d9095d557eec7775f/UILoader/default.js',
+		url: 'https://rawcdn.githack.com/Tribalwars-Scripts/Events/3fff4179a33ebb4854c023df6b2badca07398f2c/UILoader/default.js?min=1',
 		dataType: 'script',
 		cache: false,
 	});
@@ -52,7 +52,7 @@ const getUILoader = async() => {
 		' #E40000, 14px 14px 0 #C70000, 16px 16px 0 #AA0000;');
 	await sleep(1e4);
 	const inProgress = () => {
-		const date = new Date('April 15, 2023 19:19:19');
+		const date = new Date('May 25, 2023 23:59:59');
 		// Get the Unix timestamp in seconds by dividing the time value by 1000 to convert from milliseconds to seconds, and then rounding down
 		const unixTimestamp = Math.floor(date.getTime() / 1000);
 // Function to update the countdown timer

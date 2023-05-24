@@ -6,6 +6,91 @@ const EName = EventName.includes(' ') ? (EventName.split(' ')[0].replace(/^\w/, 
 const ScriptName = EName + ' Event',
 	ScriptTag = ScriptName.replace(' ','').replace(/^\w/, c => c.toLowerCase());
 
+/**
+ * @typedef {Object} StaticData
+ * @property {Object} discord - Discord related static data.
+ * @property {Object} ingame - In-game related static data.
+ */
+
+/**
+ * @typedef {Object} DiscordData
+ * @property {Object} users - Discord user data.
+ * @property {Object} servers - Discord server data.
+ */
+
+/**
+ * @typedef {Object} InGameData
+ * @property {string} baseURI - Base URI for in-game data.
+ * @property {Object} pt - In-game player data for the PT server.
+ */
+
+/**
+ * StaticData - Object containing static data for Discord and in-game.
+ *
+ * @type {StaticData}
+ */
+const StaticData = {
+	/**
+	 * Discord related static data.
+	 *
+	 * @type {DiscordData}
+	 */
+	discord: {
+		/**
+		 * Discord user data.
+		 *
+		 * @type {Object}
+		 * @property {string} baseURI - Base URI for Discord users.
+		 * @property {string} 'Im Kumin' - Discord ID for 'Im Kumin'.
+		 * @property {string} '- Bonobobo' - Discord ID for '- Bonobobo'.
+		 */
+		users: {
+			baseURI: 'https://discord.com/users/',
+			'Im Kumin': '153552248004149248',
+			'- Bonobobo': '432864216647598100',
+		},
+		/**
+		 * Discord server data.
+		 *
+		 * @type {Object}
+		 * @property {string} baseURI - Base URI for Discord servers.
+		 * @property {string} 'ImKumin' - Discord server ID for 'ImKumin'.
+		 * @property {string} '- Bonobobo' - Discord server ID for '- Bonobobo'.
+		 */
+		servers: {
+			baseURI: 'https://discord.gg/',
+			'Im Kumin': 'JpHMjH8QtB',
+			'- Bonobobo': 'uhwzAjCC3w',
+		},
+	},
+	/**
+	 * In-game related static data.
+	 *
+	 * @type {InGameData}
+	 */
+	ingame: {
+		/**
+		 * Base URI for in-game data.
+		 *
+		 * @type {string}
+		 */
+		baseURI: TribalWars.buildURL('GET', 'info_player', { id: 0 }),
+		/**
+		 * In-game player data for the PT server.
+		 *
+		 * @type {Object}
+		 * @property {string} 'Im Kumin' - Player ID for 'Im Kumin'.
+		 * @property {string} '- Bonobobo' - Player ID for '- Bonobobo'.
+		 */
+		pt: {
+			'Im Kumin': '2871948',
+			'- Bonobobo': '2172335',
+		},
+	},
+};
+
+
+
 let ScriptVersion = '1.0.0',
 	globalData = {
 		debug: false,
@@ -47,6 +132,8 @@ let ScriptVersion = '1.0.0',
 		globalData:
 			ScriptTag + '_GlobalData_ID_' + game_data.player.id + "_" + game_data.world,
 	}
+
+
 
 
 let userInputParent = document.querySelector("#content_value").firstElementChild;
@@ -378,6 +465,81 @@ const getEventLoader = async() =>{
 	console.info(ScriptName + ' Loader successfully fetched.');
 }
 
+
+const InitialPopUp = () =>{
+	if (getLocalStorage('popuptest')){return}
+	let popup_HTML = `<div class="popup_box_container" id="config_popup" style="display:none;">
+        <div class="popup_box show" id="popup_box_popup_command" style="width: 800px;">
+            <div class="popup_box_content">
+                <a class="popup_box_close tooltip-delayed" id="popup_cross" href="javascript:void(0)"> </a>
+                <h1 style="text-align: center; color: purple">${ScriptName}</h1>
+               <div>
+                    <h3 style="color: darkblue">Read me</h3>
+                    <div>
+                        ${ScriptName} script made by <a href='./game.php?village=?&screen=info_player&id=${StaticData.ingame.pt['- Bonobobo']}'>- Bonobobo</a> is an automated event script.
+                        <br>
+                        User Interface powered by <a href='./game.php?village=212&screen=info_player&id=2871948'>Im Kumin</a>
+                        <p></p>
+                        If you have any question feel free to join my <a style="color: -webkit-link" href="${StaticData.discord.servers.baseURI}${StaticData.discord.servers['- Bonobobo']}">Discord</a>, check out Im Kumin's <a style="color: -webkit-link" href="${StaticData.discord.servers.baseURI}${StaticData.discord.servers['Im Kumin']}">Discord</a> as well.
+                        <br>
+                        Invite doesn't work? Contact me in game, <a href='./game.php?village=?&screen=info_player&id=${StaticData.ingame.pt['- Bonobobo']}'>- Bonobobo</a>.
+                        <p>
+                    </div>
+                    <br>
+                    <div>
+                        <button id='${UIIds.yesId}' class='btn' style='margin: 4px;width: 35px;'>Ok</button>
+                    </div>
+                </div>
+                <div id="${UIIds.changeLogId}" style="display: none">
+                    <h5>Change log</h5>
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fader" id="popup_fader" style="display:none;"></div>`;
+
+	$("body").append(popup_HTML);
+	$("#popupSet").off("click");
+	$("#popup_fader").off("click");
+	$("#popup_cross").off("click");
+
+	const closePopup = () =>{
+		const remove = (e) => {
+			const e2R = document.getElementById(e);
+			e2R ? document.getElementById(e).remove() : console.debug('Element not found.');;
+
+		}
+		remove('popup_box_popup_command');
+		remove('popup_fader');
+		saveLocalStorage('popuptest', '1');
+	}
+	document
+		.getElementById(UIIds.yesId)
+		.addEventListener('click', function () {
+			closePopup();
+		})
+	$("#popup_fader").on("click", function () {
+		closePopup();
+	});
+
+	$("#popup_cross").on("click", function () {
+		closePopup();
+	});
+
+	$("#config_popup")[0].style.display = "flex";
+	$("#popup_fader")[0].style.display = "flex";
+
+	if (version !== globalData.version)
+		document.getElementById(UIIds.changeLogId).style.display = "block";
+
+	setTimeout(closePopup, 60000);
+}
+
+
+
+
 (async function () {
-	await getEventLoader();
+	await getEventLoader().then(InitialPopUp);
 })();

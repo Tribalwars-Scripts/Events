@@ -1,9 +1,8 @@
 const EventScreen=game_data.screen;
 const regex=/(?<=event_).*/;
-const regexPlus=/(?<=_).*/;
 const match = EventScreen.match(regex);
 const EventName = match[0].includes('_') ? match[0].replace('_', ' ') : match[0];
-const EName = EventName.replace(/^\w/, c => c.toUpperCase());
+const EName = EventName.includes(' ') ? (EventName.split(' ')[0].replace(/^\w/, c => c.toUpperCase())) + " " +  (EventName.split(' ')[1].replace(/^\w/, c => c.toUpperCase())) : EventName.replace(/^\w/, c => c.toUpperCase());
 const ScriptName = EName + ' Event',
 	ScriptTag = ScriptName.replace(' ','').replace(/^\w/, c => c.toLowerCase());
 

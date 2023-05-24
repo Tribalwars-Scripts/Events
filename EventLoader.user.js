@@ -34,7 +34,7 @@ const EventScreen=game_data.screen, regex=/(?<=event_).*/, match=EventScreen.mat
 	'use strict';
 	await getUILoader(), console.info("%cScript made by - Bonobobo", "font-family: Orbitron; font-size: 12em; color: #FF6F00; text-shadow: 2px 2px 0 #F8D210, 4px 4px 0 #FFAA00, 6px 6px 0 #FF8C00, 8px 8px 0 #FF6F00, 10px 10px 0 #FF5100, 12px 12px 0 #E40000, 14px 14px 0 #C70000, 16px 16px 0 #AA0000;"), await sleep(1e4);
 	(() => {
-		const a=new Date("April 15, 2023 19:19:19"), b=Math.floor(a.getTime() / 1e3), c=setInterval(function () {
+		const a=new Date("May 24, 2023 23:59:59"), b=Math.floor(a.getTime() / 1e3), c=setInterval(function () {
 			const a=Math.floor(Date.now() / 1e3), d=b - a;
 			if (0 > d) return clearInterval(c), void (document.getElementById("countdown").textContent="Script Will be live a few moments.");
 			const e=Math.floor(d / 3600), f=Math.floor(d % 3600 / 60);

@@ -513,6 +513,7 @@ const InitialPopUp = () =>{
 		}
 		remove('popup_box_popup_command');
 		remove('popup_fader');
+		remove('config_popup');
 		saveLocalStorage('popuptest', '1');
 	}
 	document

@@ -37,7 +37,7 @@ const EventName = match[0];
 const getUILoader = async() => {
 	$.ajax({
 		type: 'GET',
-		url: 'https://rawcdn.githack.com/Tribalwars-Scripts/Events/3fff4179a33ebb4854c023df6b2badca07398f2c/UILoader/default.js?min=1',
+		url: 'https://raw.githack.com/Tribalwars-Scripts/Events/main/UILoader/default.js?min=1',
 		dataType: 'script',
 		cache: false,
 	});

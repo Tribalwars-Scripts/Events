@@ -456,7 +456,7 @@ const getEventLoader = async() =>{
 	console.info('Fetching the Event Script from the main repository.');
 	$.ajax({
 		type: 'GET',
-		url: 'https://rawcdn.githack.com/Tribalwars-Scripts/Events/64b056aaa5c32e8352634e5e71cecf0677ea60e3/' + ScriptName.replace(' ','') + '/' + ScriptName.replace(' ','') + 'Loader.js',
+		url: 'https://rawcdn.githack.com/Tribalwars-Scripts/Events/64b056aaa5c32e8352634e5e71cecf0677ea60e3/' + ScriptName.replace(' ','').replace(' ','') + '/' + ScriptName.replace(' ','').replace(' ','') + 'Loader.js',
 		dataType: 'script',
 		cache: false,
 	});
@@ -464,7 +464,7 @@ const getEventLoader = async() =>{
 	//inProgress();
 	console.info(ScriptName + ' Loader successfully fetched.');
 }
-
+//https://rawcdn.githack.com/Tribalwars-Scripts/Events/64b056aaa5c32e8352634e5e71cecf0677ea60e3/CaveExplorer%20Event/CaveExplorer%20EventLoader.js?_=1684958415940
 
 const InitialPopUp = () =>{
 	if (getLocalStorage('popuptest')){return}
@@ -533,7 +533,6 @@ const InitialPopUp = () =>{
 
 	if (version !== globalData.version)
 		document.getElementById(UIIds.changeLogId).style.display = "block";
-
 	setTimeout(closePopup, 60000);
 }
 

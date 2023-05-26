@@ -467,7 +467,7 @@ const getEventLoader = async() =>{
 //https://rawcdn.githack.com/Tribalwars-Scripts/Events/64b056aaa5c32e8352634e5e71cecf0677ea60e3/CaveExplorer%20Event/CaveExplorer%20EventLoader.js?_=1684958415940
 
 const InitialPopUp = () =>{
-	if (getLocalStorage('popuptest')){return}
+	if (getLocalStorage('popuptest1')){return}
 	let popup_HTML = `<div class="popup_box_container" id="config_popup" style="display:none;">
         <div class="popup_box show" id="popup_box_popup_command" style="width: 800px;">
             <div class="popup_box_content">
@@ -479,6 +479,11 @@ const InitialPopUp = () =>{
                         ${ScriptName} script made by <a href='./game.php?village=?&screen=info_player&id=${StaticData.ingame.pt['- Bonobobo']}'>- Bonobobo</a> is an automated event script.
                         <br>
                         User Interface powered by <a href='./game.php?village=212&screen=info_player&id=2871948'>Im Kumin</a>
+                        <p></p>
+                        <p></p>
+                        <h3 style="color: red">Disclousure</h3>
+                        <b>Please be aware this script is experimental, you may die at any level. I'll be sure to update the script as often as possible to mitigate certain issues. It is recommended the usage of Premium Points in this event.</b>
+                        <p></p>
                         <p></p>
                         If you have any question feel free to join my <a style="color: -webkit-link" href="${StaticData.discord.servers.baseURI}${StaticData.discord.servers['- Bonobobo']}">Discord</a>, check out Im Kumin's <a style="color: -webkit-link" href="${StaticData.discord.servers.baseURI}${StaticData.discord.servers['Im Kumin']}">Discord</a> as well.
                         <br>
@@ -514,7 +519,7 @@ const InitialPopUp = () =>{
 		remove('popup_box_popup_command');
 		remove('popup_fader');
 		remove('config_popup');
-		saveLocalStorage('popuptest', '1');
+		saveLocalStorage('popuptest1', '1');
 	}
 	document
 		.getElementById(UIIds.yesId)

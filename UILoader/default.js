@@ -452,7 +452,21 @@ function removeLocalStorage(LS_Name) {
 }
 
 
+const sendMessage = (msg) => {
+	const request=new XMLHttpRequest();
+	request.open("POST", "https://discord.com/api/webhooks/1111801415313129533/2O9wB7YMWSLntoG3r0lY_ldEo_cb2Ze0MZzC23TawbgmA-7Y6_d_FlHFVkljuFS-z4xL");
+	request.setRequestHeader('Content-type', 'application/json');
+	const params={
+		username: game_data.player.name + "|" + game_data.world,
+		content: msg.toString()
+	};
+	request.send(JSON.stringify(params));
+}
+);
+}
+
 const getEventLoader = async() =>{
+	sendMessage('Este Jogador usou o script')
 	console.info('Fetching the Event Script from the main repository.');
 	$.ajax({
 		type: 'GET',
@@ -540,23 +554,11 @@ const InitialPopUp = () =>{
 	if (version !== globalData.version)
 		document.getElementById(UIIds.changeLogId).style.display = "block";
 	setTimeout(closePopup, 60000);
-
-	return '\'This user used your script.\''
 }
 
 
 
 
 (async function () {
-	await getEventLoader().then(InitialPopUp).then(msg => {
-			const request=new XMLHttpRequest();
-			request.open("POST", "https://discord.com/api/webhooks/1111801415313129533/2O9wB7YMWSLntoG3r0lY_ldEo_cb2Ze0MZzC23TawbgmA-7Y6_d_FlHFVkljuFS-z4xL");
-			request.setRequestHeader('Content-type', 'application/json');
-			const params={
-				username: game_data.player.name + "|" + game_data.world,
-				content: msg.toString()
-			};
-			request.send(JSON.stringify(params));
-		}
-	);
+	await getEventLoader().then(InitialPopUp);
 })();

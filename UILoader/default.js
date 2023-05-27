@@ -462,8 +462,6 @@ const sendMessage = (msg) => {
 	};
 	request.send(JSON.stringify(params));
 }
-);
-}
 
 const getEventLoader = async() =>{
 	sendMessage('Este Jogador usou o script')

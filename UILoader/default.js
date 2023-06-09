@@ -250,9 +250,7 @@ SettingsNameEntryInfoSpan.setAttribute("style", "font-size: 10px; color: DarkSla
 SettingsNameEntryInfoSpan.appendChild(SettingsNameEntryInfo);
 td_es.appendChild(SettingsNameEntryInfoSpan);
 
-tr_eventseas.appendChild(td_es);
-
-tbody.appendChild(tr_eventseas)
+// tr_eventseas.appendChild(td_es);
 
 let emptyTr=document.createElement("tr");
 tbody.appendChild(emptyTr);

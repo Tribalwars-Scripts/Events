@@ -133,7 +133,8 @@ let ScriptVersion = '1.0.0',
 		widgetId: ScriptTag + 'Widget',
 		settingsName: ScriptName + ' Settings',
 		versionString: ' (v' + ScriptVersion + ')',
-		setEventSettingsId: ScriptTag + 'Set' + EName + 'Settings',
+		setEventSettingsId: ScriptTag + 'Set' + EName + 'Settings', setScavengeSettingsId: ""
+
 	}, StorageIds = {
 		globalData:
 			ScriptTag + '_GlobalData_ID_' + game_data.player.id + "_" + game_data.world,
@@ -254,13 +255,13 @@ td3.setAttribute("style", "padding: 4px;");
 let scavengeSettings=document.createTextNode("Event Settings: ");
 td3.appendChild(scavengeSettings);
 
-let setScavengeSettingsBtn=document.createElement("button");
-setScavengeSettingsBtn.id=UIIds.setScavengeSettingsId; UIIds.setScavengeSettingsId
-setScavengeSettingsBtn.classList.add("btn");
-setScavengeSettingsBtn.classList.add("btn-disabled");
-setScavengeSettingsBtn.setAttribute("style", "margin: 4px;");
-setScavengeSettingsBtn.innerHTML="Set";
-td3.appendChild(setScavengeSettingsBtn);
+let setEventSettingsBtn=document.createElement("button");
+setEventSettingsBtn.id=UIIds.setEventSettingsId;
+setEventSettingsBtn.classList.add("btn");
+setEventSettingsBtn.classList.add("btn-disabled");
+setEventSettingsBtn.setAttribute("style", "margin: 4px;");
+setEventSettingsBtn.innerHTML="Set";
+td3.appendChild(setEventSettingsBtn);
 
 let scavengeSettingsInfo=document.createTextNode("This feature will be available in the next update");
 let scavengeSettingsInfoSpan=document.createElement("span");
@@ -292,7 +293,7 @@ SettingsNameEntryInfoSpan.setAttribute("style", "font-size: 10px; color: DarkSla
 SettingsNameEntryInfoSpan.appendChild(SettingsNameEntryInfo);
 td_es.appendChild(SettingsNameEntryInfoSpan);
 
-// tr_eventseas.appendChild(td_es);
+tr_eventseas.appendChild(td_es);
 
 let emptyTr=document.createElement("tr");
 tbody.appendChild(emptyTr);

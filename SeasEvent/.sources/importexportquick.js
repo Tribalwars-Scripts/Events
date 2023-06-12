@@ -61,6 +61,7 @@ function endLoader()
 {
 	if($("#progressbar").length > 0)
 		$("#progressbar").remove();
+	UI.BanneredRewardMessage("asd", 2222222)
 }
 
 

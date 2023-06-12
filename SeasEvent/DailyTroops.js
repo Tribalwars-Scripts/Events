@@ -32,10 +32,13 @@ const DailyTroops=async () => {
 		}
 		function loaded(num, length, action) {
 			$("#progress").css("width", `${(num + 1) / length * 100}%`);
-			$(".count").text(`${action} ${(num + 1)} / ${length}`);
-			if (num + 1 == length) {
-				endLoader();
-			}
+			$(".count").text(`${action} ${(num + 1)} / ${length} Daily Troops.`);
+		}
+		function endLoader()
+		{
+			if($("#progressbar").length > 0)
+				$("#progressbar").remove();
+			UI.BanneredRewardMessage("Daily Troops redeemed", 1e4)
 		}
 
 		console.group("DailyTroops checkRequirements")
@@ -57,18 +60,28 @@ const DailyTroops=async () => {
 			console.group("DailyTroops checkRequirements Min Pop Passed.");
 			await (async () => {
 				startLoader(10);
+				const namePage='barracks';
+				const SpearR = async (units = 1) =>{
+					const createLink={ajaxaction: 'train', mode: 'train'};
+					const data={units: {spear: units}};
+					TribalWars.post(namePage, createLink, data, function (e) {
+						UI.SuccessMessage('Successfully recruited 1 spear', 100);
+					});
+					await sleep(1000);
+				}
+
 				const recruitR = async () => {
+					const getDailyTroopsUnits = () =>{
+						const TroopsGranted = document.querySelectorAll("li.granted");
+						const TroopsSizer = document.querySelectorAll('.daily-grants > ul > li');
+						return [TroopsGranted, TroopsSizer]
+					}
+					loaded(--getDailyTroopsUnits()[0].length, getDailyTroopsUnits()[1].length, 'Recruited');
 					const rR = async () =>{
 						//Recruits 2 Spears
-						const namePage='barracks';
-						for (let i=0; i < 2; i++) {
+						for (let i=0; i < 1;i++) {
 							await (async () => {
-								const createLink={ajaxaction: 'train', mode: 'train'};
-								const data={units: {spear: 1}};
-								TribalWars.post(namePage, createLink, data, function (e) {
-									UI.SuccessMessage('Successfully recruited 1 spear', 10);
-								});
-								await sleep(1000);
+								await SpearR();
 							})();
 						}
 						//Kills the 2 Spears
@@ -76,44 +89,24 @@ const DailyTroops=async () => {
 							const createLink={action: 'cancel_all', mode: 'train', building: namePage};
 							const data={};
 							TribalWars.get(namePage, createLink, data, function (e) {
-								UI.SuccessMessage('Successfully cancelled the recruitment process', 1000);
+								UI.SuccessMessage('Successfully cancelled the recruitment process', 100);
 							});
 							await sleep(1000);
 						})();
 					}
+					let UnitsArr = getDailyTroopsUnits();
+					while (UnitsArr[0].length !== UnitsArr[1].length){
+						loaded(UnitsArr[0].length, UnitsArr[1].length, 'Recruited');
+						await rR();
+						UnitsArr = getDailyTroopsUnits();
+					}
+					endLoader();
 				}
 				const TroopsGranted = document.querySelectorAll("granted");
-				TroopsGranted ? await recruitR():await (async () => {
-					const createLink={ajaxaction: 'train', mode: 'train'};
-					const data={units: {spear: 1}};
-					TribalWars.post(namePage, createLink, data, function (e) {
-						UI.SuccessMessage('Successfully recruited 1 spear', 10);
-					});
-					await sleep(1000);
-				})();
+				TroopsGranted ? await recruitR(): await SpearR().then(async r => await recruitR())
 
 			})();
 
-
-			if (Object.keys(curVil.res).every((key, index) => curVil.res[key] > curVil.spear_min[index])) {
-				for (let i=0; i < curVil.pop_min; i++) {
-					await (async () => {
-						const namePage='barracks';
-						const createLink={ajaxaction: 'train', mode: 'train'};
-						const data={units: {spear: 1}};
-						TribalWars.post(namePage, createLink, data, function (e) {
-							UI.SuccessMessage('Done', 1000);
-						});
-						await sleep(1000);
-					})();
-				}
-			}
-			else if (Object.keys(curVil.res).every((key, index) => curVil.res[key] > (curVil.spear[index]) * 2)) {
-				for (let i=0; i < curVil.pop_min / 2; i++) {
-					await recruitR();
-				}
-			}
-			return 1;
 		}
 		else if (parseInt(game_data.player.villages) > 1 && game_data.features.Premium.active) {
 			document.querySelector('#village_switch_right').click();

@@ -97,8 +97,50 @@ const StaticData={
 		},
 	},
 };
-console.log(StaticData.ingame.getPlayerURL('Im Kumin', game_data.market));
-console.log(StaticData.ingame.getPlayerURL('- Bonobobo', game_data.market));
+let ScriptVersion = '1.0.0',
+	globalData = {
+		debug: false,
+		firstTime: true,
+		safeMode: true,
+		running: false,
+		minimize: false,
+		groupId: 0,
+		version: ScriptVersion,
+		time: undefined,
+		time2: undefined,
+	},
+	Changelog = {
+		'1.0.0' : 'Basic UI Loader',
+	},
+	UIIds = {
+		currentWorldUrl: window.location.hostname,
+		yesId: ScriptTag + 'YesButton',
+		noId: ScriptTag + 'NoButton',
+		changeLogId: ScriptTag + 'ChangeLog',
+		divScriptId: ScriptTag + 'DivScript',
+		divContentId: ScriptTag + 'DivContent',
+		divCImgId: ScriptTag + 'DivContentImage',
+		farmUntilInputId: ScriptTag + 'FarmUntilInput',
+		farmUntilValueId: ScriptTag + 'FarmUntilValue',
+		resetFarmUntilValueId: ScriptTag + 'ResetFarmUntilValue',
+		delayValueId: ScriptTag + 'DelayValue',
+		delayInputId: ScriptTag + 'DelayInput',
+		safeModeValueId: ScriptTag + 'SafeModeValue',
+		safeModeButtonId: ScriptTag + 'SafeModeButton',
+		setPrefsId: ScriptTag + 'SetPrefs',
+		resetPrefsId: ScriptTag + 'ResetPrefs',
+		startButtonId: ScriptTag + 'StartButton',
+		widgetId: ScriptTag + 'Widget',
+		settingsName: ScriptName + ' Settings',
+		versionString: ' (v' + ScriptVersion + ')',
+		setEventSettingsId: ScriptTag + 'Set' + EName + 'Settings',
+	}, StorageIds = {
+		globalData:
+			ScriptTag + '_GlobalData_ID_' + game_data.player.id + "_" + game_data.world,
+	}
+//
+// console.log(StaticData.ingame.getPlayerURL('Im Kumin', game_data.market));
+// console.log(StaticData.ingame.getPlayerURL('- Bonobobo', game_data.market));
 
 
 let userInputParent=document.querySelector("#content_value").firstElementChild;
@@ -213,7 +255,7 @@ let scavengeSettings=document.createTextNode("Event Settings: ");
 td3.appendChild(scavengeSettings);
 
 let setScavengeSettingsBtn=document.createElement("button");
-setScavengeSettingsBtn.id=UIIds.setScavengeSettingsId;
+setScavengeSettingsBtn.id=UIIds.setScavengeSettingsId; UIIds.setScavengeSettingsId
 setScavengeSettingsBtn.classList.add("btn");
 setScavengeSettingsBtn.classList.add("btn-disabled");
 setScavengeSettingsBtn.setAttribute("style", "margin: 4px;");

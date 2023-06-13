@@ -24,7 +24,7 @@ const DailyTroops=async () => {
 	const checkRequirements=async () => {
 		function startLoader(length) {
 			let width=$("#content_value")[0].clientWidth;
-			$("#content_value").eq(0).prepend(`
+			$("#seasEventDivScript").eq(0).prepend(`
     <div id="progressbar" class="progress-bar progress-bar-alive">
         <span class="count label">0/${length}</span>
         <div id="progress"><span class="count label" style="width: ${width}px;">0/${length}</span></div>

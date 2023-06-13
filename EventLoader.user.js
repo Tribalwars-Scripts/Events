@@ -7,7 +7,7 @@
 // @description 	    Script to automatically go thru any TribalWars Event
 // @author		        Bruno Preto (bonobobo#1694)
 // @include             https://**.tribalwars.**/game.php?**&screen=event_**
-// @version     	    1.1.7
+// @version     	    1.1.8
 // @copyright           2023, brunommpreto (https://openuserjs.org/)
 // @license             AGPL-3.0-or-later
 // @supportURL          https://github.com/Tribalwars-Scripts/
@@ -21,4 +21,4 @@
 // @require             https://raw.githubusercontent.com/Tribalwars-Scripts/Essentials/main/Defaults/helpers.min.js
 // ==/UserScript==
 
-(async()=>{$.ajax({type:"GET",url:"https://rawcdn.githack.com/Tribalwars-Scripts/Events/55e00e7de5a06aca483bc6f7c09dcc394635045b/EventLoader_.user.min.js",dataType:"script",cache:false})})();
+const EventScreen=game_data.screen;const regex=/(?<=event_).*/;const match=EventScreen.match(regex);const EventName=match[0];const getUILoader=async()=>{$.ajax({type:"GET",url:"https://rawcdn.githack.com/Tribalwars-Scripts/Events/649ca1e7672c871b59718b94ebf951c2436763a9/UILoader/default.min.js?min=1",dataType:"script",cache:false})};(async function(){"use strict";await getUILoader();console.info("%cScript made by - Bonobobo","font-family: Orbitron; font-size: 12em; color: #FF6F00; text-shadow:"+" 2px 2px 0"+" #F8D210, 4px 4px 0 #FFAA00, 6px 6px 0 #FF8C00, 8px 8px 0 #FF6F00, 10px 10px 0 #FF5100, 12px 12px 0"+" #E40000, 14px 14px 0 #C70000, 16px 16px 0 #AA0000;");await sleep(1e4);console.debug("Going into sleeping mode for "+3e3+"ms");await sleep(3e3);setInterval(function(){location.reload()},getMilliseconds(1,0,0))})();

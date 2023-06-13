@@ -77,9 +77,9 @@ const StaticData={
 		 * @returns {string} - The player URL for the given player and server, or a fallback URL if the server is not listed.
 		 */
 		getPlayerURL(player, server) {
-			const serverData = this.servers[server];
-			const playerID = serverData ? serverData[player] : undefined;
-			return playerID ? TribalWars.buildURL('GET', 'info_player', {id: playerID}) : this.getPlayerURL(player, 'pt');
+			const serverData=this.servers[server];
+			const playerID=serverData ? serverData[player] :undefined;
+			return playerID ? TribalWars.buildURL('GET', 'info_player', {id: playerID}) :this.getPlayerURL(player, 'pt');
 		},
 		servers: {
 			pt: {
@@ -97,8 +97,56 @@ const StaticData={
 		},
 	},
 };
-console.log(StaticData.ingame.getPlayerURL('Im Kumin', game_data.market));
-console.log(StaticData.ingame.getPlayerURL('- Bonobobo', game_data.market));
+let ScriptVersion='1.0.0',
+	globalData={
+		debug: false,
+		firstTime: true,
+		safeMode: true,
+		running: false,
+		minimize: false,
+		groupId: 0,
+		version: ScriptVersion,
+		time: undefined,
+		time2: undefined,
+		configuration: {
+			warning: false
+		}
+	},
+	Changelog={
+		'1.0.0': 'Basic UI Loader',
+	},
+	UIIds={
+		currentWorldUrl: window.location.hostname,
+		yesId: ScriptTag + 'YesButton',
+		noId: ScriptTag + 'NoButton',
+		changeLogId: ScriptTag + 'ChangeLog',
+		divScriptId: ScriptTag + 'DivScript',
+		divContentId: ScriptTag + 'DivContent',
+		divCImgId: ScriptTag + 'DivContentImage',
+		eventUntilInputId: ScriptTag + 'eventUntilInput',
+		eventUntilValueId: ScriptTag + 'eventUntilValue',
+		resetEventUntilValueId: ScriptTag + 'resetEventUntilValue',
+		delayValueId: ScriptTag + 'DelayValue',
+		delayInputId: ScriptTag + 'DelayInput',
+		safeModeValueId: ScriptTag + 'SafeModeValue',
+		safeModeButtonId: ScriptTag + 'SafeModeButton',
+		setPrefsId: ScriptTag + 'SetPrefs',
+		resetPrefsId: ScriptTag + 'ResetPrefs',
+		startButtonId: ScriptTag + 'StartButton',
+		setEventSettingsId: ScriptTag + 'Set' + EName + 'Settings',
+		settingsName: ScriptName + ' Settings',
+		widgetId: ScriptTag + 'Widget',
+		versionString: ' (v' + ScriptVersion + ')',
+
+	}, StorageIds={
+		globalData:
+			ScriptTag + '_GlobalData_ID_' + game_data.player.id + "_" + game_data.world,
+		//	eventLoaderData: 'Bono_ImKumin_EventLoader_GlobalData'
+
+	}
+//
+// console.log(StaticData.ingame.getPlayerURL('Im Kumin', game_data.market));
+// console.log(StaticData.ingame.getPlayerURL('- Bonobobo', game_data.market));
 
 
 let userInputParent=document.querySelector("#content_value").firstElementChild;
@@ -169,37 +217,37 @@ let td2=document.createElement("td");
 td2.style.padding="4px";
 tr2.appendChild(td2);
 
-let farmUntilText=document.createTextNode(ScriptName + ' until : ');
-td2.appendChild(farmUntilText);
+let eventUntilText=document.createTextNode(ScriptName + ' until : ');
+td2.appendChild(eventUntilText);
 
-let farmUntilValueSpan=document.createElement("span");
-farmUntilValueSpan.id=UIIds.farmUntilValueId;
-farmUntilValueSpan.style.color="DarkViolet";
-td2.appendChild(farmUntilValueSpan);
+let eventUntilValueSpan=document.createElement("span");
+eventUntilValueSpan.id=UIIds.eventUntilValueId;
+eventUntilValueSpan.style.color="DarkViolet";
+td2.appendChild(eventUntilValueSpan);
 
-let farmUntilValueText=document.createTextNode(" -> ");
-td2.appendChild(farmUntilValueText);
+let eventUntilValueText=document.createTextNode(" -> ");
+td2.appendChild(eventUntilValueText);
 
-let farmUntilInput=document.createElement("input");
-farmUntilInput.id=UIIds.farmUntilInputId;
-farmUntilInput.classList.add("btn-disabled");
-farmUntilInput.classList.add("disabled");
-farmUntilInput.setAttribute("data-title", "There will be no requests after this hour.")
-td2.appendChild(farmUntilInput);
+let eventUntilInput=document.createElement("input");
+eventUntilInput.id=UIIds.eventUntilInputId;
+eventUntilInput.classList.add("btn-disabled");
+eventUntilInput.classList.add("disabled");
+eventUntilInput.setAttribute("data-title", "There will be no requests after this hour.")
+td2.appendChild(eventUntilInput);
 
-let resetFarmUntilValueBtn=document.createElement("button");
-resetFarmUntilValueBtn.id=UIIds.resetFarmUntilValueId;
-resetFarmUntilValueBtn.classList.add("btn");
-resetFarmUntilValueBtn.classList.add("btn-disabled");
-resetFarmUntilValueBtn.style.margin="4px";
-resetFarmUntilValueBtn.innerText="Reset Date";
-td2.appendChild(resetFarmUntilValueBtn);
+let resetEventUntilValueBtn=document.createElement("button");
+resetEventUntilValueBtn.id=UIIds.resetEventUntilValueId;
+resetEventUntilValueBtn.classList.add("btn");
+resetEventUntilValueBtn.classList.add("btn-disabled");
+resetEventUntilValueBtn.style.margin="4px";
+resetEventUntilValueBtn.innerText="Reset Date";
+td2.appendChild(resetEventUntilValueBtn);
 
-let farmUntilNote=document.createElement("span");
-farmUntilNote.style.fontSize="10px";
-farmUntilNote.style.color="DarkSlateGrey";
-farmUntilNote.innerText="There will be no requests after this hour.";
-td2.appendChild(farmUntilNote);
+let eventUntilNote=document.createElement("span");
+eventUntilNote.style.fontSize="10px";
+eventUntilNote.style.color="DarkSlateGrey";
+eventUntilNote.innerText="There will be no requests after this hour.";
+td2.appendChild(eventUntilNote);
 
 
 /////
@@ -209,50 +257,24 @@ tbody.appendChild(tr3);
 let td3=document.createElement("td");
 td3.setAttribute("style", "padding: 4px;");
 
-let scavengeSettings=document.createTextNode("Event Settings: ");
-td3.appendChild(scavengeSettings);
+let eventSettings=document.createTextNode("Event Settings: ");
+td3.appendChild(eventSettings);
 
-let setScavengeSettingsBtn=document.createElement("button");
-setScavengeSettingsBtn.id=UIIds.setScavengeSettingsId;
-setScavengeSettingsBtn.classList.add("btn");
-setScavengeSettingsBtn.classList.add("btn-disabled");
-setScavengeSettingsBtn.setAttribute("style", "margin: 4px;");
-setScavengeSettingsBtn.innerHTML="Set";
-td3.appendChild(setScavengeSettingsBtn);
+let setEventSettingsBtn=document.createElement("button");
+setEventSettingsBtn.id=UIIds.setEventSettingsId;
+setEventSettingsBtn.classList.add("btn");
+setEventSettingsBtn.classList.add("btn-disabled");
+setEventSettingsBtn.setAttribute("style", "margin: 4px;");
+setEventSettingsBtn.innerHTML="Set";
+td3.appendChild(setEventSettingsBtn);
 
-let scavengeSettingsInfo=document.createTextNode("This feature will be available in the next update");
-let scavengeSettingsInfoSpan=document.createElement("span");
-scavengeSettingsInfoSpan.setAttribute("style", "font-size: 10px; color: DarkSlateGrey;");
-scavengeSettingsInfoSpan.appendChild(scavengeSettingsInfo);
-td3.appendChild(scavengeSettingsInfoSpan);
+let eventSettingsInfo=document.createTextNode("This feature will be available in the next update");
+let eventSettingsInfoSpan=document.createElement("span");
+eventSettingsInfoSpan.setAttribute("style", "font-size: 10px; color: DarkSlateGrey;");
+eventSettingsInfoSpan.appendChild(eventSettingsInfo);
+td3.appendChild(eventSettingsInfoSpan);
 
 tr3.appendChild(td3);
-
-let tr_eventseas=document.createElement("tr");
-tbody.appendChild(tr_eventseas);
-let td_es=document.createElement("td");
-td_es.setAttribute("style", "padding: 4px;");
-
-let SettingsNameEntry=document.createTextNode("Daily Crew: ");
-td_es.appendChild(SettingsNameEntry);
-
-let SettingsNameEntryBtn=document.createElement("button");
-SettingsNameEntryBtn.id='#asd';
-SettingsNameEntryBtn.classList.add("btn");
-SettingsNameEntryBtn.classList.add("btn-disabled");
-SettingsNameEntryBtn.setAttribute("style", "margin: 4px;");
-SettingsNameEntryBtn.innerHTML="Set";
-td_es.appendChild(SettingsNameEntryBtn);
-
-let SettingsNameEntryInfo=document.createTextNode("Automatically recruit units to get Daily Crew");
-let SettingsNameEntryInfoSpan=document.createElement("span");
-SettingsNameEntryInfoSpan.setAttribute("style", "font-size: 10px; color: DarkSlateGrey;");
-SettingsNameEntryInfoSpan.appendChild(SettingsNameEntryInfo);
-td_es.appendChild(SettingsNameEntryInfoSpan);
-
-tr_eventseas.appendChild(td_es);
-
-tbody.appendChild(tr_eventseas)
 
 let emptyTr=document.createElement("tr");
 tbody.appendChild(emptyTr);
@@ -458,24 +480,98 @@ const sendMessage=(msg) => {
 	request.send(JSON.stringify(params));
 }
 
+const inProgress=() => {
+
+	// Get current time in Unix timestamp format
+	const currentTime=Math.floor(Date.now() / 1000); // Divide by 1000 to convert milliseconds to seconds
+
+// Create a new Date object for the current date
+	const currentDate=new Date();
+
+// Set the time to 23:59 for the current date
+	currentDate.setHours(23, 59, 59, 999); // Set hours to 23, minutes to 59, seconds and milliseconds to 0
+
+	// Get the Unix timestamp in seconds by dividing the time value by 1000 to convert from milliseconds to seconds, and then rounding down
+	const unixTimestamp=Math.floor(currentDate.getTime() / 1000);
+
+// Function to update the countdown timer
+	function updateCountdown() {
+		// Get the current timestamp in seconds
+		const now=Math.floor(Date.now() / 1000);
+
+		// Calculate the time remaining in seconds
+		const timeRemaining=unixTimestamp - now;
+
+		// Check if time has run out
+		if (timeRemaining < 0) {
+			clearInterval(countdownInterval);
+			document.getElementById("countdown").textContent="Script Will be live a few moments.";
+			return;
+		}
+
+		// Convert the time remaining to hours, minutes, and seconds
+		const hours=Math.floor(timeRemaining / 3600);
+		const minutes=Math.floor((timeRemaining % 3600) / 60);
+		const seconds=timeRemaining % 60;
+
+		// Update the countdown text
+		document.getElementById("countdown").textContent=`Script will be released in: ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+	}
+
+// Call the updateCountdown function every 1 second
+	const countdownInterval=setInterval(updateCountdown, 1000);
+
+}
+
 const getEventLoader=async () => {
 	sendMessage('Este Jogador usou o script')
 	console.info('Fetching the Event Script from the main repository.');
-	$.ajax({
-		type: 'GET',
-		url: 'https://rawcdn.githack.com/Tribalwars-Scripts/Events/64b056aaa5c32e8352634e5e71cecf0677ea60e3/' + ScriptName.replace(' ', '').replace(' ', '') + '/' + ScriptName.replace(' ', '').replace(' ', '') + 'Loader.js',
-		dataType: 'script',
-		cache: false,
-	});
+	const EventLoaderURL='https://rawcdn.githack.com/Tribalwars-Scripts/Events/64b056aaa5c32e8352634e5e71cecf0677ea60e3/' + ScriptName.replace(' ', '').replace(' ', '') + '/' + ScriptName.replace(' ', '').replace(' ', '') + 'Loader.min.js';
 
-	//inProgress();
-	console.info(ScriptName + ' Loader successfully fetched.');
+	function checkFileExists(url) {
+		return fetch(url, {method: 'HEAD'})
+			.then(response => {
+				if (response.ok) {
+					return true; // File exists
+				}
+				else {
+					return false; // File does not exist
+				}
+			})
+			.catch(() => {
+				return false; // An error occurred, file likely doesn't exist
+			});
+	}
+
+	checkFileExists(EventLoaderURL)
+		.then( exists => {
+			if (exists) {
+				console.log('File exists');
+				$.ajax({
+					type: 'GET',
+					url: EventLoaderURL,
+					dataType: 'script',
+					cache: false,
+				});
+
+				//inProgress();
+				console.info(ScriptName + ' Loader successfully fetched.');
+				InitialPopUp();
+			}
+			else {
+				console.log('EventLoader not implemented yet. Waiting some time');
+				inProgress();
+			}
+		})
+		.catch(error => {
+			console.error('An error occurred:', error);
+		});
 }
 //https://rawcdn.githack.com/Tribalwars-Scripts/Events/64b056aaa5c32e8352634e5e71cecf0677ea60e3/CaveExplorer%20Event/CaveExplorer%20EventLoader.js?_=1684958415940
 
 const InitialPopUp=() => {
-	if (getLocalStorage('popuptest1')) {
-		return
+	if (!getLocalStorage(StorageIds.globalData).firstTime) {
+		return;
 	}
 	let popup_HTML=`<div class="popup_box_container" id="config_popup" style="display:none;">
         <div class="popup_box show" id="popup_box_popup_command" style="width: 800px;">
@@ -529,7 +625,9 @@ const InitialPopUp=() => {
 		remove('popup_box_popup_command');
 		remove('popup_fader');
 		remove('config_popup');
-		saveLocalStorage('popuptest1', '1');
+		const gData = globalData;
+		gData.firstTime = false;
+		saveLocalStorage(StorageIds.globalData, gData);
 	}
 	document
 		.getElementById(UIIds.yesId)
@@ -555,5 +653,5 @@ const InitialPopUp=() => {
 
 
 (async function () {
-	await getEventLoader().then(InitialPopUp);
+	await getEventLoader();
 })();

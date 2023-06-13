@@ -109,7 +109,7 @@ let ScriptVersion='1.0.0',
 		time: undefined,
 		time2: undefined,
 		configuration: {
-			warning: undefined
+			warning: false
 		}
 	},
 	Changelog={
@@ -123,9 +123,9 @@ let ScriptVersion='1.0.0',
 		divScriptId: ScriptTag + 'DivScript',
 		divContentId: ScriptTag + 'DivContent',
 		divCImgId: ScriptTag + 'DivContentImage',
-		farmUntilInputId: ScriptTag + 'FarmUntilInput',
-		farmUntilValueId: ScriptTag + 'FarmUntilValue',
-		resetFarmUntilValueId: ScriptTag + 'ResetFarmUntilValue',
+		eventUntilInputId: ScriptTag + 'eventUntilInput',
+		eventUntilValueId: ScriptTag + 'eventUntilValue',
+		resetEventUntilValueId: ScriptTag + 'resetEventUntilValue',
 		delayValueId: ScriptTag + 'DelayValue',
 		delayInputId: ScriptTag + 'DelayInput',
 		safeModeValueId: ScriptTag + 'SafeModeValue',
@@ -133,10 +133,10 @@ let ScriptVersion='1.0.0',
 		setPrefsId: ScriptTag + 'SetPrefs',
 		resetPrefsId: ScriptTag + 'ResetPrefs',
 		startButtonId: ScriptTag + 'StartButton',
-		widgetId: ScriptTag + 'Widget',
+		setEventSettingsId: ScriptTag + 'Set' + EName + 'Settings',
 		settingsName: ScriptName + ' Settings',
+		widgetId: ScriptTag + 'Widget',
 		versionString: ' (v' + ScriptVersion + ')',
-		setEventSettingsId: ScriptTag + 'Set' + EName + 'Settings', setScavengeSettingsId: ""
 
 	}, StorageIds={
 		globalData:
@@ -217,37 +217,37 @@ let td2=document.createElement("td");
 td2.style.padding="4px";
 tr2.appendChild(td2);
 
-let farmUntilText=document.createTextNode(ScriptName + ' until : ');
-td2.appendChild(farmUntilText);
+let eventUntilText=document.createTextNode(ScriptName + ' until : ');
+td2.appendChild(eventUntilText);
 
-let farmUntilValueSpan=document.createElement("span");
-farmUntilValueSpan.id=UIIds.farmUntilValueId;
-farmUntilValueSpan.style.color="DarkViolet";
-td2.appendChild(farmUntilValueSpan);
+let eventUntilValueSpan=document.createElement("span");
+eventUntilValueSpan.id=UIIds.eventUntilValueId;
+eventUntilValueSpan.style.color="DarkViolet";
+td2.appendChild(eventUntilValueSpan);
 
-let farmUntilValueText=document.createTextNode(" -> ");
-td2.appendChild(farmUntilValueText);
+let eventUntilValueText=document.createTextNode(" -> ");
+td2.appendChild(eventUntilValueText);
 
-let farmUntilInput=document.createElement("input");
-farmUntilInput.id=UIIds.farmUntilInputId;
-farmUntilInput.classList.add("btn-disabled");
-farmUntilInput.classList.add("disabled");
-farmUntilInput.setAttribute("data-title", "There will be no requests after this hour.")
-td2.appendChild(farmUntilInput);
+let eventUntilInput=document.createElement("input");
+eventUntilInput.id=UIIds.eventUntilInputId;
+eventUntilInput.classList.add("btn-disabled");
+eventUntilInput.classList.add("disabled");
+eventUntilInput.setAttribute("data-title", "There will be no requests after this hour.")
+td2.appendChild(eventUntilInput);
 
-let resetFarmUntilValueBtn=document.createElement("button");
-resetFarmUntilValueBtn.id=UIIds.resetFarmUntilValueId;
-resetFarmUntilValueBtn.classList.add("btn");
-resetFarmUntilValueBtn.classList.add("btn-disabled");
-resetFarmUntilValueBtn.style.margin="4px";
-resetFarmUntilValueBtn.innerText="Reset Date";
-td2.appendChild(resetFarmUntilValueBtn);
+let resetEventUntilValueBtn=document.createElement("button");
+resetEventUntilValueBtn.id=UIIds.resetEventUntilValueId;
+resetEventUntilValueBtn.classList.add("btn");
+resetEventUntilValueBtn.classList.add("btn-disabled");
+resetEventUntilValueBtn.style.margin="4px";
+resetEventUntilValueBtn.innerText="Reset Date";
+td2.appendChild(resetEventUntilValueBtn);
 
-let farmUntilNote=document.createElement("span");
-farmUntilNote.style.fontSize="10px";
-farmUntilNote.style.color="DarkSlateGrey";
-farmUntilNote.innerText="There will be no requests after this hour.";
-td2.appendChild(farmUntilNote);
+let eventUntilNote=document.createElement("span");
+eventUntilNote.style.fontSize="10px";
+eventUntilNote.style.color="DarkSlateGrey";
+eventUntilNote.innerText="There will be no requests after this hour.";
+td2.appendChild(eventUntilNote);
 
 
 /////
@@ -257,8 +257,8 @@ tbody.appendChild(tr3);
 let td3=document.createElement("td");
 td3.setAttribute("style", "padding: 4px;");
 
-let scavengeSettings=document.createTextNode("Event Settings: ");
-td3.appendChild(scavengeSettings);
+let eventSettings=document.createTextNode("Event Settings: ");
+td3.appendChild(eventSettings);
 
 let setEventSettingsBtn=document.createElement("button");
 setEventSettingsBtn.id=UIIds.setEventSettingsId;
@@ -268,11 +268,11 @@ setEventSettingsBtn.setAttribute("style", "margin: 4px;");
 setEventSettingsBtn.innerHTML="Set";
 td3.appendChild(setEventSettingsBtn);
 
-let scavengeSettingsInfo=document.createTextNode("This feature will be available in the next update");
-let scavengeSettingsInfoSpan=document.createElement("span");
-scavengeSettingsInfoSpan.setAttribute("style", "font-size: 10px; color: DarkSlateGrey;");
-scavengeSettingsInfoSpan.appendChild(scavengeSettingsInfo);
-td3.appendChild(scavengeSettingsInfoSpan);
+let eventSettingsInfo=document.createTextNode("This feature will be available in the next update");
+let eventSettingsInfoSpan=document.createElement("span");
+eventSettingsInfoSpan.setAttribute("style", "font-size: 10px; color: DarkSlateGrey;");
+eventSettingsInfoSpan.appendChild(eventSettingsInfo);
+td3.appendChild(eventSettingsInfoSpan);
 
 tr3.appendChild(td3);
 

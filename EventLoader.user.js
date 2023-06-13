@@ -7,7 +7,7 @@
 // @description 	    Script to automatically go thru any TribalWars Event
 // @author		        Bruno Preto (bonobobo#1694)
 // @include             https://**.tribalwars.**/game.php?**&screen=event_**
-// @version     	    1.1.6
+// @version     	    1.1.7
 // @copyright           2023, brunommpreto (https://openuserjs.org/)
 // @license             AGPL-3.0-or-later
 // @supportURL          https://github.com/Tribalwars-Scripts/
@@ -21,4 +21,4 @@
 // @require             https://raw.githubusercontent.com/Tribalwars-Scripts/Essentials/main/Defaults/helpers.min.js
 // ==/UserScript==
 
-(async()=>{$.ajax({type:"GET",url:"https://github.com/Tribalwars-Scripts/Events/raw/main/EventLoader._user.min.js",dataType:"script",cache:false})})();
+(async()=>{$.ajax({type:"GET",url:"https://rawcdn.githack.com/Tribalwars-Scripts/Events/55e00e7de5a06aca483bc6f7c09dcc394635045b/EventLoader_.user.min.js",dataType:"script",cache:false})})();

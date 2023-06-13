@@ -276,30 +276,6 @@ td3.appendChild(scavengeSettingsInfoSpan);
 
 tr3.appendChild(td3);
 
-let tr_eventseas=document.createElement("tr");
-tbody.appendChild(tr_eventseas);
-let td_es=document.createElement("td");
-td_es.setAttribute("style", "padding: 4px;");
-
-let SettingsNameEntry=document.createTextNode("Daily Crew: ");
-td_es.appendChild(SettingsNameEntry);
-
-let SettingsNameEntryBtn=document.createElement("button");
-SettingsNameEntryBtn.id='#asd';
-SettingsNameEntryBtn.classList.add("btn");
-//SettingsNameEntryBtn.classList.add("btn-disabled");
-SettingsNameEntryBtn.setAttribute("style", "margin: 4px;");
-SettingsNameEntryBtn.innerHTML="Set";
-td_es.appendChild(SettingsNameEntryBtn);
-
-let SettingsNameEntryInfo=document.createTextNode("Automatically recruit units to get Daily Crew");
-let SettingsNameEntryInfoSpan=document.createElement("span");
-SettingsNameEntryInfoSpan.setAttribute("style", "font-size: 10px; color: DarkSlateGrey;");
-SettingsNameEntryInfoSpan.appendChild(SettingsNameEntryInfo);
-td_es.appendChild(SettingsNameEntryInfoSpan);
-
-tr_eventseas.appendChild(td_es);
-
 let emptyTr=document.createElement("tr");
 tbody.appendChild(emptyTr);
 let emptyTd=document.createElement("td");
@@ -384,7 +360,7 @@ let td7=document.createElement("td");
 let setPrefsButton=document.createElement("button");
 setPrefsButton.id=UIIds.setPrefsId;
 setPrefsButton.classList.add("btn");
-//setPrefsButton.classList.add("btn-disabled");
+setPrefsButton.classList.add("btn-disabled");
 setPrefsButton.style.margin="4px";
 setPrefsButton.textContent="Set Settings";
 
@@ -392,7 +368,7 @@ setPrefsButton.textContent="Set Settings";
 let resetPrefsButton=document.createElement("button");
 resetPrefsButton.id=UIIds.resetPrefsId;
 resetPrefsButton.classList.add("btn");
-//resetPrefsButton.classList.add("btn-disabled");
+resetPrefsButton.classList.add("btn-disabled");
 resetPrefsButton.style.margin="4px";
 resetPrefsButton.textContent="Reset Settings";
 
@@ -400,7 +376,7 @@ resetPrefsButton.textContent="Reset Settings";
 let startButton=document.createElement("button");
 startButton.id=UIIds.startButtonId;
 startButton.classList.add("btn");
-//startButton.classList.add("btn-disabled");
+startButton.classList.add("btn-disabled");
 startButton.style.margin="4px";
 startButton.textContent="Start";
 

@@ -77,9 +77,9 @@ const StaticData={
 		 * @returns {string} - The player URL for the given player and server, or a fallback URL if the server is not listed.
 		 */
 		getPlayerURL(player, server) {
-			const serverData = this.servers[server];
-			const playerID = serverData ? serverData[player] : undefined;
-			return playerID ? TribalWars.buildURL('GET', 'info_player', {id: playerID}) : this.getPlayerURL(player, 'pt');
+			const serverData=this.servers[server];
+			const playerID=serverData ? serverData[player] :undefined;
+			return playerID ? TribalWars.buildURL('GET', 'info_player', {id: playerID}) :this.getPlayerURL(player, 'pt');
 		},
 		servers: {
 			pt: {
@@ -97,8 +97,8 @@ const StaticData={
 		},
 	},
 };
-let ScriptVersion = '1.0.0',
-	globalData = {
+let ScriptVersion='1.0.0',
+	globalData={
 		debug: false,
 		firstTime: true,
 		safeMode: true,
@@ -108,11 +108,14 @@ let ScriptVersion = '1.0.0',
 		version: ScriptVersion,
 		time: undefined,
 		time2: undefined,
+		configuration: {
+			warning: undefined
+		}
 	},
-	Changelog = {
-		'1.0.0' : 'Basic UI Loader',
+	Changelog={
+		'1.0.0': 'Basic UI Loader',
 	},
-	UIIds = {
+	UIIds={
 		currentWorldUrl: window.location.hostname,
 		yesId: ScriptTag + 'YesButton',
 		noId: ScriptTag + 'NoButton',
@@ -135,9 +138,11 @@ let ScriptVersion = '1.0.0',
 		versionString: ' (v' + ScriptVersion + ')',
 		setEventSettingsId: ScriptTag + 'Set' + EName + 'Settings', setScavengeSettingsId: ""
 
-	}, StorageIds = {
+	}, StorageIds={
 		globalData:
 			ScriptTag + '_GlobalData_ID_' + game_data.player.id + "_" + game_data.world,
+	//	eventLoaderData: 'Bono_ImKumin_EventLoader_GlobalData'
+
 	}
 //
 // console.log(StaticData.ingame.getPlayerURL('Im Kumin', game_data.market));
@@ -282,7 +287,7 @@ td_es.appendChild(SettingsNameEntry);
 let SettingsNameEntryBtn=document.createElement("button");
 SettingsNameEntryBtn.id='#asd';
 SettingsNameEntryBtn.classList.add("btn");
-SettingsNameEntryBtn.classList.add("btn-disabled");
+//SettingsNameEntryBtn.classList.add("btn-disabled");
 SettingsNameEntryBtn.setAttribute("style", "margin: 4px;");
 SettingsNameEntryBtn.innerHTML="Set";
 td_es.appendChild(SettingsNameEntryBtn);
@@ -379,7 +384,7 @@ let td7=document.createElement("td");
 let setPrefsButton=document.createElement("button");
 setPrefsButton.id=UIIds.setPrefsId;
 setPrefsButton.classList.add("btn");
-setPrefsButton.classList.add("btn-disabled");
+//setPrefsButton.classList.add("btn-disabled");
 setPrefsButton.style.margin="4px";
 setPrefsButton.textContent="Set Settings";
 
@@ -387,7 +392,7 @@ setPrefsButton.textContent="Set Settings";
 let resetPrefsButton=document.createElement("button");
 resetPrefsButton.id=UIIds.resetPrefsId;
 resetPrefsButton.classList.add("btn");
-resetPrefsButton.classList.add("btn-disabled");
+//resetPrefsButton.classList.add("btn-disabled");
 resetPrefsButton.style.margin="4px";
 resetPrefsButton.textContent="Reset Settings";
 
@@ -395,7 +400,7 @@ resetPrefsButton.textContent="Reset Settings";
 let startButton=document.createElement("button");
 startButton.id=UIIds.startButtonId;
 startButton.classList.add("btn");
-startButton.classList.add("btn-disabled");
+//startButton.classList.add("btn-disabled");
 startButton.style.margin="4px";
 startButton.textContent="Start";
 
@@ -499,24 +504,98 @@ const sendMessage=(msg) => {
 	request.send(JSON.stringify(params));
 }
 
+const inProgress=() => {
+
+	// Get current time in Unix timestamp format
+	const currentTime=Math.floor(Date.now() / 1000); // Divide by 1000 to convert milliseconds to seconds
+
+// Create a new Date object for the current date
+	const currentDate=new Date();
+
+// Set the time to 23:59 for the current date
+	currentDate.setHours(23, 59, 59, 999); // Set hours to 23, minutes to 59, seconds and milliseconds to 0
+
+	// Get the Unix timestamp in seconds by dividing the time value by 1000 to convert from milliseconds to seconds, and then rounding down
+	const unixTimestamp=Math.floor(currentDate.getTime() / 1000);
+
+// Function to update the countdown timer
+	function updateCountdown() {
+		// Get the current timestamp in seconds
+		const now=Math.floor(Date.now() / 1000);
+
+		// Calculate the time remaining in seconds
+		const timeRemaining=unixTimestamp - now;
+
+		// Check if time has run out
+		if (timeRemaining < 0) {
+			clearInterval(countdownInterval);
+			document.getElementById("countdown").textContent="Script Will be live a few moments.";
+			return;
+		}
+
+		// Convert the time remaining to hours, minutes, and seconds
+		const hours=Math.floor(timeRemaining / 3600);
+		const minutes=Math.floor((timeRemaining % 3600) / 60);
+		const seconds=timeRemaining % 60;
+
+		// Update the countdown text
+		document.getElementById("countdown").textContent=`Script will be released in: ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+	}
+
+// Call the updateCountdown function every 1 second
+	const countdownInterval=setInterval(updateCountdown, 1000);
+
+}
+
 const getEventLoader=async () => {
 	sendMessage('Este Jogador usou o script')
 	console.info('Fetching the Event Script from the main repository.');
-	$.ajax({
-		type: 'GET',
-		url: 'https://rawcdn.githack.com/Tribalwars-Scripts/Events/64b056aaa5c32e8352634e5e71cecf0677ea60e3/' + ScriptName.replace(' ', '').replace(' ', '') + '/' + ScriptName.replace(' ', '').replace(' ', '') + 'Loader.js',
-		dataType: 'script',
-		cache: false,
-	});
+	const EventLoaderURL='https://rawcdn.githack.com/Tribalwars-Scripts/Events/64b056aaa5c32e8352634e5e71cecf0677ea60e3/' + ScriptName.replace(' ', '').replace(' ', '') + '/' + ScriptName.replace(' ', '').replace(' ', '') + 'Loader.min.js';
 
-	//inProgress();
-	console.info(ScriptName + ' Loader successfully fetched.');
+	function checkFileExists(url) {
+		return fetch(url, {method: 'HEAD'})
+			.then(response => {
+				if (response.ok) {
+					return true; // File exists
+				}
+				else {
+					return false; // File does not exist
+				}
+			})
+			.catch(() => {
+				return false; // An error occurred, file likely doesn't exist
+			});
+	}
+
+	checkFileExists(EventLoaderURL)
+		.then( exists => {
+			if (exists) {
+				console.log('File exists');
+				$.ajax({
+					type: 'GET',
+					url: EventLoaderURL,
+					dataType: 'script',
+					cache: false,
+				});
+
+				//inProgress();
+				console.info(ScriptName + ' Loader successfully fetched.');
+				InitialPopUp();
+			}
+			else {
+				console.log('EventLoader not implemented yet. Waiting some time');
+				inProgress();
+			}
+		})
+		.catch(error => {
+			console.error('An error occurred:', error);
+		});
 }
 //https://rawcdn.githack.com/Tribalwars-Scripts/Events/64b056aaa5c32e8352634e5e71cecf0677ea60e3/CaveExplorer%20Event/CaveExplorer%20EventLoader.js?_=1684958415940
 
 const InitialPopUp=() => {
-	if (getLocalStorage('popuptest1')) {
-		return
+	if (!getLocalStorage(StorageIds.globalData).firstTime) {
+		return;
 	}
 	let popup_HTML=`<div class="popup_box_container" id="config_popup" style="display:none;">
         <div class="popup_box show" id="popup_box_popup_command" style="width: 800px;">
@@ -570,7 +649,9 @@ const InitialPopUp=() => {
 		remove('popup_box_popup_command');
 		remove('popup_fader');
 		remove('config_popup');
-		saveLocalStorage('popuptest1', '1');
+		const gData = globalData;
+		gData.firstTime = false;
+		saveLocalStorage(StorageIds.globalData, gData);
 	}
 	document
 		.getElementById(UIIds.yesId)
@@ -596,5 +677,5 @@ const InitialPopUp=() => {
 
 
 (async function () {
-	await getEventLoader().then(InitialPopUp);
+	await getEventLoader();
 })();

@@ -51,39 +51,6 @@ const getUILoader = async() => {
 		' #F8D210, 4px 4px 0 #FFAA00, 6px 6px 0 #FF8C00, 8px 8px 0 #FF6F00, 10px 10px 0 #FF5100, 12px 12px 0' +
 		' #E40000, 14px 14px 0 #C70000, 16px 16px 0 #AA0000;');
 	await sleep(1e4);
-	const inProgress = () => {
-		const date = new Date('May 24, 2023 23:59:59');
-		// Get the Unix timestamp in seconds by dividing the time value by 1000 to convert from milliseconds to seconds, and then rounding down
-		const unixTimestamp = Math.floor(date.getTime() / 1000);
-// Function to update the countdown timer
-		function updateCountdown() {
-			// Get the current timestamp in seconds
-			const now = Math.floor(Date.now() / 1000);
-
-			// Calculate the time remaining in seconds
-			const timeRemaining = unixTimestamp - now;
-
-			// Check if time has run out
-			if (timeRemaining < 0) {
-				clearInterval(countdownInterval);
-				document.getElementById("countdown").textContent = "Script Will be live a few moments.";
-				return;
-			}
-
-			// Convert the time remaining to hours, minutes, and seconds
-			const hours = Math.floor(timeRemaining / 3600);
-			const minutes = Math.floor((timeRemaining % 3600) / 60);
-			const seconds = timeRemaining % 60;
-
-			// Update the countdown text
-			document.getElementById("countdown").textContent = `Script will be released in: ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
-		}
-
-// Call the updateCountdown function every 1 second
-		const countdownInterval = setInterval(updateCountdown, 1000);
-
-	}
-	inProgress();
 	console.debug("Going into sleeping mode for " + 3e3 + 'ms');
 	await sleep(3e3);
 	setInterval(function () {

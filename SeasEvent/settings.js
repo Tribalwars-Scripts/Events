@@ -1,25 +1,26 @@
+(async () => {
 
-const settingsUUIDs = {
-	popupSettings: {
-		popup_box : 'popup_box', //private
-		container: this.popup_box + '_container',
-		containerID: ScriptTag +this.popup_box+ '_container',
-		show: this.popup_box + ' show',
-		showID: ScriptTag + this.popup_box + '_popup_show',
-		content: this.popup_box + '_content',
-		close: {
-			main:this.popup_box + '_close',
-			tooltip: 'tooltip-delayed',
-			ID: this.popup_box + '_cross',
-			href: 'javascript:void(0)'
-		},
+	const settingsUUIDs = {
+		popupSettings: {
+			popup_box : 'popup_box', //private
+			container: this.popup_box + '_container',
+			containerID: ScriptTag +this.popup_box+ '_container',
+			show: this.popup_box + ' show',
+			showID: ScriptTag + this.popup_box + '_popup_show',
+			content: this.popup_box + '_content',
+			close: {
+				main:this.popup_box + '_close',
+				tooltip: 'tooltip-delayed',
+				ID: this.popup_box + '_cross',
+				href: 'javascript:void(0)'
+			},
+		}
 	}
-}
 
-const EventSettings = {
-	daily_troops: false
-}
-let popup_HTML=`<div class="popup_box_container" id="config_popup" style="display:none;">
+	const EventSettings = {
+		daily_troops: false
+	}
+	let popup_HTML=`<div class="popup_box_container" id="config_popup" style="display:none;">
         <div class="popup_box show" id="popup_box_popup_command" style="width: 800px;">
             <div class="popup_box_content">
                 <a class="popup_box_close tooltip-delayed" id="popup_cross" href="javascript:void(0)"> </a>
@@ -57,78 +58,80 @@ let popup_HTML=`<div class="popup_box_container" id="config_popup" style="displa
         </div>
     </div>
     <div class="fader" id="popup_fader" style="display:none;"></div>`;
+	$("body").append(popup_HTML);
+	$("#popupSet").off("click");
+	$("#popup_fader").off("click");
+	$("#popup_cross").off("click");
 
-$("body").append(popup_HTML);
-$("#popupSet").off("click");
-$("#popup_fader").off("click");
-$("#popup_cross").off("click");
 
 
-let yesButtonId = "#" + UIIds.yesId;
-let noButtonId = "#" + UIIds.noId;
+	let yesButtonId = "#" + UIIds.yesId;
+	let noButtonId = "#" + UIIds.noId;
 
-function loadBeforePopUp() {
-	let data = getLocalStorage(StorageIds.globalData);
-	const saveSett = () => {
-		data.EventSettings = EventSettings;
-	}
-	if (data != null) // data exists
-		if (data.EventSettings) { // already has event settings
-			globalData = data;
-		}else {
-			saveSett();
+	function loadBeforePopUp() {
+		let data = getLocalStorage(StorageIds.globalData);
+		const saveSett = () => {
+			data.EventSettings = EventSettings;
 		}
-	else
-		saveSett();
-	globalData = data;
-	saveLocalStorage(StorageIds.globalData, globalData)
-	return data;
-}
-const parseSettings = () => {
-	data = loadBeforePopUp();
-	if (data.EventSettings.daily_troops){
-		document.getElementById(UIIds.noId).classList.add('btn-disabled')
-		document.getElementById(UIIds.yesId).classList.remove('btn-disabled')
-	}else {
-		document.getElementById(UIIds.noId).classList.remove('btn-disabled')
-		document.getElementById(UIIds.yesId).classList.add('btn-disabled')
+		if (data != null) // data exists
+			if (data.EventSettings) { // already has event settings
+				globalData = data;
+			}else {
+				saveSett();
+			}
+		else
+			saveSett();
+		globalData = data;
+		saveLocalStorage(StorageIds.globalData, globalData)
+		return data;
 	}
-
-}
-const closePopup=() => {
-	const remove=(e) => {
-		const e2R=document.getElementById(e);
-		e2R ? document.getElementById(e).remove() :console.debug('Element not found.');
-		;
+	const parseSettings = () => {
+		data = loadBeforePopUp();
+		if (data.EventSettings.daily_troops){
+			document.getElementById(UIIds.noId).classList.add('btn-disabled')
+			document.getElementById(UIIds.yesId).classList.remove('btn-disabled')
+		}else {
+			document.getElementById(UIIds.noId).classList.remove('btn-disabled')
+			document.getElementById(UIIds.yesId).classList.add('btn-disabled')
+		}
 
 	}
-	remove('popup_box_popup_command');
-	remove('popup_fader');
-	remove('config_popup');
-	const gData = globalData;
-	gData.firstTime = false;
-	saveLocalStorage(StorageIds.globalData, gData);
-}
-$(yesButtonId).on("click", function () {
-	globalData.EventSettings = true;
-	closePopup();
-});
+	parseSettings();
+	const closePopup=() => {
+		const remove=(e) => {
+			const e2R=document.getElementById(e);
+			e2R ? document.getElementById(e).remove() :console.debug('Element not found.');
+			;
 
-$(noButtonId).on("click", function () {
-	globalData.EventSettings = false;
-	closePopup();
-});
+		}
+		remove('popup_box_popup_command');
+		remove('popup_fader');
+		remove('config_popup');
+		const gData = globalData;
+		gData.firstTime = false;
+		saveLocalStorage(StorageIds.globalData, gData);
+	}
+	$(yesButtonId).on("click", function () {
+		globalData.EventSettings = true;
+		closePopup();
+	});
 
-$("#popup_fader").on("click", function () {
-	closePopup();
-});
+	$(noButtonId).on("click", function () {
+		globalData.EventSettings = false;
+		closePopup();
+	});
 
-$("#popup_cross").on("click", function () {
-	closePopup();
-});
+	$("#popup_fader").on("click", function () {
+		closePopup();
+	});
 
-$("#config_popup")[0].style.display = "flex";
-$("#popup_fader")[0].style.display = "flex";
+	$("#popup_cross").on("click", function () {
+		closePopup();
+	});
+
+	$("#config_popup")[0].style.display = "flex";
+	$("#popup_fader")[0].style.display = "flex";
 
 
-setTimeout(closePopup, 60000);
+	setTimeout(closePopup, 60000);
+})();

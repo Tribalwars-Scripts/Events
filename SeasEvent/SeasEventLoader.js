@@ -17,10 +17,19 @@ const resetSettings=() => {
 	if (data) {
 		data.EventSettings=null
 	}
+	printSuccess("Settings have been reset")
 }
 
 const saveSettings=() => {
-	saveLocalStorage(StorageIds.globalData, globalData)
+
+	const getSaved = getLocalStorage(StorageIds.globalData)
+
+	if (getSaved === globalData){
+		printError("Nothing to save.")
+		return
+	}
+	saveLocalStorage(StorageIds.globalData, globalData);
+	printSuccess("Settings successfully saved")
 }
 
 unlockButtons();

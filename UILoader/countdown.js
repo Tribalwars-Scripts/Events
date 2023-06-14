@@ -31,7 +31,8 @@
 			// Check if time has run out
 			if (timeRemaining < 0) {
 				clearInterval(countdownInterval);
-				document.getElementById("countdown").textContent="Script Will be live a few moments.";
+				document.getElementById("countdown").textContent= scriptLive ? "DailyTroops will soon be recruited" : "Script Will be" +
+					" live a few moments.";
 				return;
 			}
 
@@ -41,7 +42,10 @@
 			const seconds=timeRemaining % 60;
 
 			// Update the countdown text
-			document.getElementById("countdown").textContent=`Script will be released in: ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+			document
+				.getElementById("countdown")
+				.textContent= (scriptLive ? "Next daily troops in :" : "Script will be released in:") +  "${hours}" +
+				" hours, ${minutes} minutes, ${seconds} seconds"
 		}
 
 // Call the updateCountdown function every 1 second

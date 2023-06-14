@@ -1,5 +1,83 @@
 (async () => {
 
+	/**
+	 * @typedef {Object} StaticData
+	 * @property {Object} discord - Discord related static data.
+	 * @property {Object} ingame - In-game related static data.
+	 */
+
+	/**
+	 * @typedef {Object} DiscordData
+	 * @property {Object} users - Discord user data.
+	 * @property {Object} servers - Discord server data.
+	 */
+
+	/**
+	 * @typedef {Object} InGameData
+	 * @property {function(string, string): string} getPlayerURL - Function to get the player URL for a specific player and server.
+	 */
+
+	/**
+	 * StaticData - Object containing static data for Discord and in-game.
+	 *
+	 * @type {StaticData}
+	 */
+	const StaticData={
+		/**
+		 * Discord related static data.
+		 *
+		 * @type {DiscordData}
+		 */
+		discord: {
+			/**
+			 * Discord user data.
+			 *
+			 * @type {Object}
+			 * @property {string} baseURI - Base URI for Discord users.
+			 * @property {string} 'Im Kumin' - Discord ID for 'Im Kumin'.
+			 * @property {string} '- Bonobobo' - Discord ID for '- Bonobobo'.
+			 */
+			users: {
+				baseURI: 'https://discord.com/users/', 'Im Kumin': '153552248004149248', '- Bonobobo': '432864216647598100',
+			}, /**
+			 * Discord server data.
+			 *
+			 * @type {Object}
+			 * @property {string} baseURI - Base URI for Discord servers.
+			 * @property {string} 'ImKumin' - Discord server ID for 'ImKumin'.
+			 * @property {string} '- Bonobobo' - Discord server ID for '- Bonobobo'.
+			 */
+			servers: {
+				baseURI: 'https://discord.gg/', 'Im Kumin': 'JpHMjH8QtB', '- Bonobobo': 'uhwzAjCC3w',
+			},
+		}, /**
+		 * In-game related static data.
+		 *
+		 * @type {InGameData}
+		 */
+		ingame: {
+			/**
+			 * Function to get the player URL for a specific player and server.
+			 *
+			 * @param {string} player - The player name.
+			 * @param {string} server - The server name.
+			 * @returns {string} - The player URL for the given player and server, or a fallback URL if the server is not listed.
+			 */
+			getPlayerURL(player, server) {
+				const serverData=this.servers[server];
+				const playerID=serverData ? serverData[player] :undefined;
+				return playerID ? TribalWars.buildURL('GET', 'info_player', {id: playerID}) :this.getPlayerURL(player, 'pt');
+			}, servers: {
+				pt: {
+					'Im Kumin': '2871948', '- Bonobobo': '2172335',
+				}, es: {
+					'Im Kumin': '31413', '- Bonobobo': '456765',
+				}, fr: {
+					'Im Kumin': '567567', '- Bonobobo': '345345',
+				},
+			},
+		},
+	};
 	const settingsUUIDs = {
 		popupSettings: {
 			popup_box : 'popup_box', //private

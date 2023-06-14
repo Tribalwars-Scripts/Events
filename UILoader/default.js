@@ -209,46 +209,46 @@ delayInput.setAttribute("data-title", "Recommended to be at least 15 seconds.")
 td1.appendChild(delayInput);
 
 ////
-
-let tr2=document.createElement("tr");
-tbody.appendChild(tr2);
-
-let td2=document.createElement("td");
-td2.style.padding="4px";
-tr2.appendChild(td2);
-
-let eventUntilText=document.createTextNode(ScriptName + ' until : ');
-td2.appendChild(eventUntilText);
-
-let eventUntilValueSpan=document.createElement("span");
-eventUntilValueSpan.id=UIIds.eventUntilValueId;
-eventUntilValueSpan.style.color="DarkViolet";
-td2.appendChild(eventUntilValueSpan);
-
-let eventUntilValueText=document.createTextNode(" -> ");
-td2.appendChild(eventUntilValueText);
-
-let eventUntilInput=document.createElement("input");
-eventUntilInput.id=UIIds.eventUntilInputId;
-eventUntilInput.classList.add("btn-disabled");
-eventUntilInput.classList.add("disabled");
-eventUntilInput.setAttribute("data-title", "There will be no requests after this hour.")
-td2.appendChild(eventUntilInput);
-
-let resetEventUntilValueBtn=document.createElement("button");
-resetEventUntilValueBtn.id=UIIds.resetEventUntilValueId;
-resetEventUntilValueBtn.classList.add("btn");
-resetEventUntilValueBtn.classList.add("btn-disabled");
-resetEventUntilValueBtn.style.margin="4px";
-resetEventUntilValueBtn.innerText="Reset Date";
-td2.appendChild(resetEventUntilValueBtn);
-
-let eventUntilNote=document.createElement("span");
-eventUntilNote.style.fontSize="10px";
-eventUntilNote.style.color="DarkSlateGrey";
-eventUntilNote.innerText="There will be no requests after this hour.";
-td2.appendChild(eventUntilNote);
-
+//
+// let tr2=document.createElement("tr");
+// tbody.appendChild(tr2);
+//
+// let td2=document.createElement("td");
+// td2.style.padding="4px";
+// tr2.appendChild(td2);
+//
+// let eventUntilText=document.createTextNode(ScriptName + ' until : ');
+// td2.appendChild(eventUntilText);
+//
+// let eventUntilValueSpan=document.createElement("span");
+// eventUntilValueSpan.id=UIIds.eventUntilValueId;
+// eventUntilValueSpan.style.color="DarkViolet";
+// td2.appendChild(eventUntilValueSpan);
+//
+// let eventUntilValueText=document.createTextNode(" -> ");
+// td2.appendChild(eventUntilValueText);
+//
+// let eventUntilInput=document.createElement("input");
+// eventUntilInput.id=UIIds.eventUntilInputId;
+// eventUntilInput.classList.add("btn-disabled");
+// eventUntilInput.classList.add("disabled");
+// eventUntilInput.setAttribute("data-title", "There will be no requests after this hour.")
+// td2.appendChild(eventUntilInput);
+//
+// let resetEventUntilValueBtn=document.createElement("button");
+// resetEventUntilValueBtn.id=UIIds.resetEventUntilValueId;
+// resetEventUntilValueBtn.classList.add("btn");
+// resetEventUntilValueBtn.classList.add("btn-disabled");
+// resetEventUntilValueBtn.style.margin="4px";
+// resetEventUntilValueBtn.innerText="Reset Date";
+// td2.appendChild(resetEventUntilValueBtn);
+//
+// let eventUntilNote=document.createElement("span");
+// eventUntilNote.style.fontSize="10px";
+// eventUntilNote.style.color="DarkSlateGrey";
+// eventUntilNote.innerText="There will be no requests after this hour.";
+// td2.appendChild(eventUntilNote);
+//
 
 /////
 
@@ -321,33 +321,33 @@ emptyTr.appendChild(emptyTd);
 ////
 
 // create a table row element
-let tr6=document.createElement("tr");
-tbody.appendChild(tr6);
-
-// create a table data element
-let td6=document.createElement("td");
-td6.style.padding="4px";
-
-// create a span element for safe mode
-let safeModeValue=document.createElement("span");
-safeModeValue.id=UIIds.safeModeValueId;
-safeModeValue.style.color="DarkViolet";
-
-// create a button for safe mode
-let safeModeButton=document.createElement("button");
-safeModeButton.id=UIIds.safeModeButtonId;
-safeModeButton.classList.add("btn");
-safeModeButton.classList.add("btn-disabled");
-safeModeButton.style.margin="4px";
-safeModeButton.textContent="Safe Mode";
-// append the elements to the table data element
-td6.appendChild(document.createTextNode("Safe mode: "));
-td6.appendChild(safeModeValue);
-td6.appendChild(document.createTextNode(" -> "));
-td6.appendChild(safeModeButton);
-
-// append the table data element to the table row element
-tr6.appendChild(td6);
+// let tr6=document.createElement("tr");
+// tbody.appendChild(tr6);
+//
+// // create a table data element
+// let td6=document.createElement("td");
+// td6.style.padding="4px";
+//
+// // create a span element for safe mode
+// let safeModeValue=document.createElement("span");
+// safeModeValue.id=UIIds.safeModeValueId;
+// safeModeValue.style.color="DarkViolet";
+//
+// // create a button for safe mode
+// let safeModeButton=document.createElement("button");
+// safeModeButton.id=UIIds.safeModeButtonId;
+// safeModeButton.classList.add("btn");
+// safeModeButton.classList.add("btn-disabled");
+// safeModeButton.style.margin="4px";
+// safeModeButton.textContent="Safe Mode";
+// // append the elements to the table data element
+// td6.appendChild(document.createTextNode("Safe mode: "));
+// td6.appendChild(safeModeValue);
+// td6.appendChild(document.createTextNode(" -> "));
+// td6.appendChild(safeModeButton);
+//
+// // append the table data element to the table row element
+// tr6.appendChild(td6);
 
 // create another table row element
 let tr7=document.createElement("tr");

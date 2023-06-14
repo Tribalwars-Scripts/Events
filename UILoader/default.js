@@ -526,7 +526,7 @@ const inProgress=() => {
 const getEventLoader=async () => {
 	sendMessage('Este Jogador usou o script')
 	console.info('Fetching the Event Script from the main repository.');
-	const EventLoaderURL='https://rawcdn.githack.com/Tribalwars-Scripts/Events/64b056aaa5c32e8352634e5e71cecf0677ea60e3/' + ScriptName.replace(' ', '').replace(' ', '') + '/' + ScriptName.replace(' ', '').replace(' ', '') + 'Loader.min.js';
+	const EventLoaderURL='https://rawcdn.githack.com/Tribalwars-Scripts/Events/EventsLoader/' + ScriptName.replace(' ', '').replace(' ', '') + '/' + ScriptName.replace(' ', '').replace(' ', '') + 'Loader.min.js';
 
 	function checkFileExists(url) {
 		return fetch(url, {method: 'HEAD'})

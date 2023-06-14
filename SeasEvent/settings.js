@@ -87,6 +87,11 @@
 	}
 	const parseSettings = () => {
 		data = loadBeforePopUp();
+		if (data.EventSettings.daily_troops === undefined){
+			document.getElementById(UIIds.noId).classList.remove('btn-disabled')
+			document.getElementById(UIIds.yesId).classList.remove('btn-disabled')
+			return;
+		}
 		if (data.EventSettings.daily_troops){
 			document.getElementById(UIIds.noId).classList.add('btn-disabled')
 			document.getElementById(UIIds.yesId).classList.remove('btn-disabled')

@@ -97,7 +97,7 @@ const StaticData={
 		},
 	},
 };
-let ScriptVersion='v0.1.0-beta',
+let ScriptVersion='v0.1.1-beta',
 	globalData={
 		debug: false,
 		firstTime: true,
@@ -114,6 +114,8 @@ let ScriptVersion='v0.1.0-beta',
 	},
 	Changelog={
 		'0.1.0-beta' : 'Basic UI Loader',
+		'0.1.1-beta' : 'Minor bug fixes',
+
 	},
 	UIIds={
 		currentWorldUrl: window.location.hostname,
@@ -529,7 +531,7 @@ const getEventLoader=async () => {
 	const EventLoaderURL='https://rawcdn.githack.com/Tribalwars-Scripts/Events/'+ ScriptVersion  +'/' + ScriptName.replace(' ', '').replace(' ', '') + '/' + ScriptName.replace(' ', '').replace(' ', '') + 'Loader.min.js';
 
 	function checkFileExists(url) {
-		return fetch(url, {method: 'HEAD'})
+		return fetch(url, {method: 'HEAD', mode:"no-cors"})
 			.then(response => {
 				if (response.ok) {
 					return true; // File exists

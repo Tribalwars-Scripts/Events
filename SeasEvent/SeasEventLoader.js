@@ -22,6 +22,7 @@ const saveSettings = () =>{
 	saveLocalStorage(StorageIds.globalData,globalData)
 }
 
+unlockButtons();
 
 const startBot = () =>{
 

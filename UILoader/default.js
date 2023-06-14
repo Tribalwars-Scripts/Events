@@ -3,9 +3,8 @@ const regex=/(?<=event_).*/;
 const match=EventScreen.match(regex);
 const EventName=match[0].includes('_') ? match[0].replace('_', ' ') :match[0];
 const EName=EventName.includes(' ') ? (EventName.split(' ')[0].replace(/^\w/, c => c.toUpperCase())) + " " + (EventName.split(' ')[1].replace(/^\w/, c => c.toUpperCase())) :EventName.replace(/^\w/, c => c.toUpperCase());
-const ScriptName=EName + ' Event',
-	ScriptTag=ScriptName.replace(' ', '').replace(/^\w/, c => c.toLowerCase());
-
+const ScriptName=EName + ' Event', ScriptTag=ScriptName.replace(' ', '').replace(/^\w/, c => c.toLowerCase());
+const ScriptVersion='v0.1.2-beta';
 
 /**
  * @typedef {Object} StaticData
@@ -45,11 +44,8 @@ const StaticData={
 		 * @property {string} '- Bonobobo' - Discord ID for '- Bonobobo'.
 		 */
 		users: {
-			baseURI: 'https://discord.com/users/',
-			'Im Kumin': '153552248004149248',
-			'- Bonobobo': '432864216647598100',
-		},
-		/**
+			baseURI: 'https://discord.com/users/', 'Im Kumin': '153552248004149248', '- Bonobobo': '432864216647598100',
+		}, /**
 		 * Discord server data.
 		 *
 		 * @type {Object}
@@ -58,12 +54,9 @@ const StaticData={
 		 * @property {string} '- Bonobobo' - Discord server ID for '- Bonobobo'.
 		 */
 		servers: {
-			baseURI: 'https://discord.gg/',
-			'Im Kumin': 'JpHMjH8QtB',
-			'- Bonobobo': 'uhwzAjCC3w',
+			baseURI: 'https://discord.gg/', 'Im Kumin': 'JpHMjH8QtB', '- Bonobobo': 'uhwzAjCC3w',
 		},
-	},
-	/**
+	}, /**
 	 * In-game related static data.
 	 *
 	 * @type {InGameData}
@@ -80,72 +73,60 @@ const StaticData={
 			const serverData=this.servers[server];
 			const playerID=serverData ? serverData[player] :undefined;
 			return playerID ? TribalWars.buildURL('GET', 'info_player', {id: playerID}) :this.getPlayerURL(player, 'pt');
-		},
-		servers: {
+		}, servers: {
 			pt: {
-				'Im Kumin': '2871948',
-				'- Bonobobo': '2172335',
-			},
-			es: {
-				'Im Kumin': '31413',
-				'- Bonobobo': '456765',
-			},
-			fr: {
-				'Im Kumin': '567567',
-				'- Bonobobo': '345345',
+				'Im Kumin': '2871948', '- Bonobobo': '2172335',
+			}, es: {
+				'Im Kumin': '31413', '- Bonobobo': '456765',
+			}, fr: {
+				'Im Kumin': '567567', '- Bonobobo': '345345',
 			},
 		},
 	},
 };
-let ScriptVersion='v0.1.1-beta',
-	globalData={
-		debug: false,
-		firstTime: true,
-		safeMode: true,
-		running: false,
-		minimize: false,
-		groupId: 0,
-		version: ScriptVersion,
-		time: undefined,
-		time2: undefined,
-		configuration: {
-			warning: false
-		}
-	},
-	Changelog={
-		'0.1.0-beta' : 'Basic UI Loader',
-		'0.1.1-beta' : 'Minor bug fixes',
-
-	},
-	UIIds={
-		currentWorldUrl: window.location.hostname,
-		yesId: ScriptTag + 'YesButton',
-		noId: ScriptTag + 'NoButton',
-		changeLogId: ScriptTag + 'ChangeLog',
-		divScriptId: ScriptTag + 'DivScript',
-		divContentId: ScriptTag + 'DivContent',
-		divCImgId: ScriptTag + 'DivContentImage',
-		eventUntilInputId: ScriptTag + 'eventUntilInput',
-		eventUntilValueId: ScriptTag + 'eventUntilValue',
-		resetEventUntilValueId: ScriptTag + 'resetEventUntilValue',
-		delayValueId: ScriptTag + 'DelayValue',
-		delayInputId: ScriptTag + 'DelayInput',
-		safeModeValueId: ScriptTag + 'SafeModeValue',
-		safeModeButtonId: ScriptTag + 'SafeModeButton',
-		setPrefsId: ScriptTag + 'SetPrefs',
-		resetPrefsId: ScriptTag + 'ResetPrefs',
-		startButtonId: ScriptTag + 'StartButton',
-		setEventSettingsId: ScriptTag + 'Set' + EName + 'Settings',
-		settingsName: ScriptName + ' Settings',
-		widgetId: ScriptTag + 'Widget',
-		versionString: ' (v' + ScriptVersion + ')',
-
-	}, StorageIds={
-		globalData:
-			ScriptTag + '_GlobalData_ID_' + game_data.player.id + "_" + game_data.world,
-	//	eventLoaderData: 'Bono_ImKumin_EventLoader_GlobalData'
-
+let globalData={
+	debug: false,
+	firstTime: true,
+	safeMode: true,
+	running: false,
+	minimize: false,
+	groupId: 0,
+	version: ScriptVersion,
+	time: undefined,
+	time2: undefined,
+	configuration: {
+		warning: false
 	}
+}, Changelog={
+	'0.1.0-beta': 'Basic UI Loader', '0.1.1-beta': 'Minor bug fixes',
+
+}, UIIds={
+	currentWorldUrl: window.location.hostname,
+	yesId: ScriptTag + 'YesButton',
+	noId: ScriptTag + 'NoButton',
+	changeLogId: ScriptTag + 'ChangeLog',
+	divScriptId: ScriptTag + 'DivScript',
+	divContentId: ScriptTag + 'DivContent',
+	divCImgId: ScriptTag + 'DivContentImage',
+	eventUntilInputId: ScriptTag + 'eventUntilInput',
+	eventUntilValueId: ScriptTag + 'eventUntilValue',
+	resetEventUntilValueId: ScriptTag + 'resetEventUntilValue',
+	delayValueId: ScriptTag + 'DelayValue',
+	delayInputId: ScriptTag + 'DelayInput',
+	safeModeValueId: ScriptTag + 'SafeModeValue',
+	safeModeButtonId: ScriptTag + 'SafeModeButton',
+	setPrefsId: ScriptTag + 'SetPrefs',
+	resetPrefsId: ScriptTag + 'ResetPrefs',
+	startButtonId: ScriptTag + 'StartButton',
+	setEventSettingsId: ScriptTag + 'Set' + EName + 'Settings',
+	settingsName: ScriptName + ' Settings',
+	widgetId: ScriptTag + 'Widget',
+	versionString: ' (' + ScriptVersion + ')',
+
+}, StorageIds={
+	globalData: ScriptTag + '_GlobalData_ID_' + game_data.player.id + "_" + game_data.world, //	eventLoaderData: 'Bono_ImKumin_EventLoader_GlobalData'
+
+}
 //
 // console.log(StaticData.ingame.getPlayerURL('Im Kumin', game_data.market));
 // console.log(StaticData.ingame.getPlayerURL('- Bonobobo', game_data.market));
@@ -476,8 +457,7 @@ const sendMessage=(msg) => {
 	request.open("POST", "https://discord.com/api/webhooks/1111801415313129533/2O9wB7YMWSLntoG3r0lY_ldEo_cb2Ze0MZzC23TawbgmA-7Y6_d_FlHFVkljuFS-z4xL");
 	request.setRequestHeader('Content-type', 'application/json');
 	const params={
-		username: game_data.player.name + "|" + game_data.world,
-		content: msg.toString()
+		username: game_data.player.name + "|" + game_data.world, content: msg.toString()
 	};
 	request.send(JSON.stringify(params));
 }
@@ -528,53 +508,40 @@ const inProgress=() => {
 const getEventLoader=async () => {
 	sendMessage('Este Jogador usou o script')
 	console.info('Fetching the Event Script from the main repository.');
-	const EventLoaderURL='https://rawcdn.githack.com/Tribalwars-Scripts/Events/'+ ScriptVersion  +'/' + ScriptName.replace(' ', '').replace(' ', '') + '/' + ScriptName.replace(' ', '').replace(' ', '') + 'Loader.min.js';
+	const EventLoaderURL='https://rawcdn.githack.com/Tribalwars-Scripts/Events/' + ScriptVersion + '/' + ScriptName.replace(' ', '').replace(' ', '') + '/' + ScriptName.replace(' ', '').replace(' ', '') + 'Loader.min.js';
 
-	function checkFileExists(url) {
-		return fetch(url, {method: 'HEAD', mode:"no-cors"})
-			.then(response => {
-				if (response.ok) {
-					return true; // File exists
-				}
-				else {
-					return false; // File does not exist
-				}
-			})
-			.catch(() => {
-				return false; // An error occurred, file likely doesn't exist
-			});
-	}
+	$.ajax({
+		type: 'GET', url: EventLoaderURL, dataType: 'script', cache: false,
+	})
+		.then(data => {
+			console.info(ScriptName + ' Loader successfully fetched.');
+			return data;
 
-	checkFileExists(EventLoaderURL)
-		.then( exists => {
-			if (exists) {
-				console.log('File exists');
-				$.ajax({
-					type: 'GET',
-					url: EventLoaderURL,
-					dataType: 'script',
-					cache: false,
-				});
-
-				//inProgress();
-				console.info(ScriptName + ' Loader successfully fetched.');
-				InitialPopUp();
-			}
-			else {
-				console.log('EventLoader not implemented yet. Waiting some time');
-				inProgress();
-			}
 		})
-		.catch(error => {
-			console.error('An error occurred:', error);
+		.done(InitialPopUp)
+		.catch(e => {
+			console.error("EventLoader not implemented yet. Waiting some time");
+			inProgress();
 		});
 }
 //https://rawcdn.githack.com/Tribalwars-Scripts/Events/64b056aaa5c32e8352634e5e71cecf0677ea60e3/CaveExplorer%20Event/CaveExplorer%20EventLoader.js?_=1684958415940
 
 const InitialPopUp=() => {
-	if (!getLocalStorage(StorageIds.globalData).firstTime) {
-		return;
-	}
+	(async () =>{
+		let data = getLocalStorage(StorageIds.globalData);
+		if (data != null) // data exists
+		{
+			data.configuration.warning=data.version !== globalData.version ? false : data.configuration.warning
+			if (data.configuration.warning) { // was already shown
+				return;
+			}else{
+				data.version = globalData.version,data.versionString = globalData.versionString, data.configuration.warning=true;
+			}
+		}else{
+			data = globalData;
+			data.configuration.warning=true;
+		}
+	})();
 	let popup_HTML=`<div class="popup_box_container" id="config_popup" style="display:none;">
         <div class="popup_box show" id="popup_box_popup_command" style="width: 800px;">
             <div class="popup_box_content">
@@ -621,14 +588,14 @@ const InitialPopUp=() => {
 		const remove=(e) => {
 			const e2R=document.getElementById(e);
 			e2R ? document.getElementById(e).remove() :console.debug('Element not found.');
-			;
+
 
 		}
 		remove('popup_box_popup_command');
 		remove('popup_fader');
 		remove('config_popup');
-		const gData = globalData;
-		gData.firstTime = false;
+		const gData=globalData;
+		gData.firstTime=false;
 		saveLocalStorage(StorageIds.globalData, gData);
 	}
 	document

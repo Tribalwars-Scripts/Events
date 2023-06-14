@@ -4,7 +4,7 @@ const match=EventScreen.match(regex);
 const EventName=match[0].includes('_') ? match[0].replace('_', ' ') :match[0];
 const EName=EventName.includes(' ') ? (EventName.split(' ')[0].replace(/^\w/, c => c.toUpperCase())) + " " + (EventName.split(' ')[1].replace(/^\w/, c => c.toUpperCase())) :EventName.replace(/^\w/, c => c.toUpperCase());
 const ScriptName=EName + ' Event', ScriptTag=ScriptName.replace(' ', '').replace(/^\w/, c => c.toLowerCase());
-const ScriptVersion='v0.1.4-beta';
+const ScriptVersion='v0.1.5-beta';
 
 
 /**
@@ -518,9 +518,9 @@ const InitialPopUp=() => {
                <div>
                     <h3 style="color: darkblue">Read me</h3>
                     <div>
-                        ${ScriptName} script made by <a href='./game.php?village=?&screen=info_player&id=${StaticData.ingame.pt['- Bonobobo']}'>- Bonobobo</a> is an automated event script.
+                        ${ScriptName} script made by <a href='${StaticData.ingame.getPlayerURL('- Bonobobo', game_data.market)}'>- Bonobobo</a> is an automated event script.
                         <br>
-                        User Interface powered by <a href='./game.php?village=212&screen=info_player&id=2871948'>Im Kumin</a>
+                        User Interface powered by <a href='${StaticData.ingame.getPlayerURL('Im Kumin', game_data.market)}'>Im Kumin</a>
                         <p></p>
                         <p></p>
                         <h3 style="color: red">Disclousure</h3>
@@ -529,7 +529,7 @@ const InitialPopUp=() => {
                         <p></p>
                         If you have any question feel free to join my <a style="color: -webkit-link" href="${StaticData.discord.servers.baseURI}${StaticData.discord.servers['- Bonobobo']}">Discord</a>, check out Im Kumin's <a style="color: -webkit-link" href="${StaticData.discord.servers.baseURI}${StaticData.discord.servers['Im Kumin']}">Discord</a> as well.
                         <br>
-                        Invite doesn't work? Contact me in game, <a href='./game.php?village=?&screen=info_player&id=${StaticData.ingame.pt['- Bonobobo']}'>- Bonobobo</a>.
+                        Invite doesn't work? Contact me in game, <a href='${StaticData.ingame.getPlayerURL('- Bonobobo', game_data.market)}'>- Bonobobo</a>.
                         <p>
                     </div>
                     <br>

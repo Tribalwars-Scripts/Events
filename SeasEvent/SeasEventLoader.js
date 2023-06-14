@@ -39,6 +39,7 @@ const startStopBot=() => {
 	savedData.running= !savedData.running;
 	document.getElementById(UIIds.startButtonId).innerText=savedData.running ? 'Stop' :'Start';
 	saveLocalStorage(StorageIds.globalData, savedData);
+	savedData.running ? start(): {}
 }
 
 document

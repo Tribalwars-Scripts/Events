@@ -42,10 +42,10 @@
 			const seconds=timeRemaining % 60;
 
 			// Update the countdown text
+			const time =hours + "hours, " + minutes +  "minutes" + seconds + ' seconds'
 			document
 				.getElementById("countdown")
-				.textContent= (scriptLive ? "Next daily troops in :" : "Script will be released in:") +  "${hours}" +
-				" hours, ${minutes} minutes, ${seconds} seconds"
+				.textContent= (scriptLive ? "Next daily troops in : " : "Script will be released in: ") + time
 		}
 
 // Call the updateCountdown function every 1 second

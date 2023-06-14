@@ -71,7 +71,7 @@
 	function loadBeforePopUp() {
 		let data = getLocalStorage(StorageIds.globalData);
 		const saveSett = () => {
-			data.EventSettings = EventSettings;
+			data.EventSettings = Object(EventSettings);
 		}
 		if (data != null) // data exists
 			if (data.EventSettings) { // already has event settings

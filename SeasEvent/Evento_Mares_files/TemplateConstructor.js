@@ -1,1 +1,0 @@
-define("Ig/TribalWars/Modules/TemplateConstructor",function(){"use strict";return function(t){this.make=function(){return $(this.replace.apply(null,arguments))},this.replace=function(){return s.apply(null,[t].concat(Array.prototype.slice.call(arguments)))},this.raw=function(){return t}}});

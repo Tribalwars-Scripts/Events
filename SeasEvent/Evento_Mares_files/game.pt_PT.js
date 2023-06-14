@@ -1,2 +1,0 @@
-/**** initialize constants ****/
-TribalWars.constants = {"item_types":{"1":"Funcionalidade","2":"Consumivel","3":"Passivo","4":"Activ\u00e1vel"},"item_categories":{"7":"Cosm\u00e9tico","5":"Item de aldeia","6":"Item de recrutamento","4":"Item de unidade","2":"Pacote de recursos","1":"Premium","3":"item do evento"},"item_tags":{"rarity":["nenhum","Comum","Incomum","Raro","Legend\u00e1rio"],"use_type":["nenhum","Consumivel","Oferecivel"]}};

@@ -29,7 +29,7 @@ const EventName=match[0];
 const getUILoader=async () => {
 	$.ajax({
 		type: "GET",
-		url: "https://rawcdn.githack.com/Tribalwars-Scripts/Events/v0.1.81-beta/UILoader/default.min.js?min=1",
+		url: "https://rawcdn.githack.com/Tribalwars-Scripts/Events/v0.1.9-beta/UILoader/default.min.js?min=1",
 		dataType: "script",
 		cache: false
 	})

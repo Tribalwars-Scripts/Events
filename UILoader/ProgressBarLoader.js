@@ -1,7 +1,5 @@
-const PBLoader=(function () {
-	let privateAttribute1='defaultValue1';
-	let privateAttribute2='defaultValue2';
-	let appendTo= "#" + UIIds.divScriptId;
+let PBLoader=(function () {
+	let appendTo= "#main_body";
 	let RewardMessage='Sample Reward Message';
 	let PBaction = ['Running','Tests']
 	let PBlength = 0;
@@ -25,10 +23,6 @@ const PBLoader=(function () {
 			$("#progressbar").remove();
 		}
 		UI.BanneredRewardMessage(RewardMessage, 1e4);
-	}
-
-	function setStandard() {
-
 	}
 
 	function setAppendTo(eID) {
@@ -65,6 +59,7 @@ const PBLoader=(function () {
 		setRewardMessage:setRewardMessage,
 		setAction: setAction,
 		getLength: getLength,
+		getAction: getAction
 	};
 })();
 

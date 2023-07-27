@@ -1,7 +1,7 @@
 const getPBLoader=async () => {
 	$.ajax({
 		type: "GET",
-		url: "https://rawcdn.githack.com/Tribalwars-Scripts/Events/v0.1.81-beta/UILoader/ProgressBarLoader.min.js?min=1",
+		url: "https://rawcdn.githack.com/Tribalwars-Scripts/Events/v0.1.9-beta/UILoader/ProgressBarLoader.min.js?min=1",
 		dataType: "script",
 		cache: false
 	})
@@ -23,11 +23,12 @@ function RollDice() {
 	PBLoader.setLength(Number(document.getElementById("dragons_energy_display").textContent.split('/')[0].trim()));
 	PBLoader.setRewardMessage("Successfully rolled " + PBLoader.getLength() + " times.")
 	PBLoader.setAppendTo(UIIds.divScriptId)
+	PBLoader.setAction(['Dice roll', 'rolls']);
 	PBLoader.startLoader();
-	Array.from({ length:  PBLoader.getLength()}, () => ['Dice roll', 'rolls']).forEach((PBmsg, index) => {
+	Array.from({ length:  PBLoader.getLength()}, () => PBLoader.getAction()).forEach((PBmessage, index) => {
 		setTimeout(async () => {
 			DragonsEvent.rollDice();
-			PBLoader.loaded(index + 1, PBLoader.getLength(), PBmsg);
+			PBLoader.loaded(index + 1, PBLoader.getLength(), PBmessage);
 			await sleep(300);
 			if (document.getElementsByClassName("event-card").length > 0){
 				document.getElementsByClassName("popup_box_close tooltip-delayed")[0].click()

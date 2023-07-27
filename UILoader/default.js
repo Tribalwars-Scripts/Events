@@ -495,18 +495,20 @@ const getEventLoader=async () => {
 //https://rawcdn.githack.com/Tribalwars-Scripts/Events/64b056aaa5c32e8352634e5e71cecf0677ea60e3/CaveExplorer%20Event/CaveExplorer%20EventLoader.js?_=1684958415940
 
 const InitialPopUp=() => {
-	(async () =>{
-		let data = getLocalStorage(StorageIds.globalData);
+	(async () => {
+		let data=getLocalStorage(StorageIds.globalData);
 		if (data != null) // data exists
 		{
-			data.configuration.warning=data.version !== globalData.version ? false : data.configuration.warning
+			data.configuration.warning=data.version !== globalData.version ? false :data.configuration.warning
 			if (data.configuration.warning) { // was already shown
-				return;
-			}else{
-				data.version = globalData.version,data.versionString = globalData.versionString, data.configuration.warning=true;
+
 			}
-		}else{
-			data = globalData;
+			else {
+				data.version=globalData.version, data.versionString=globalData.versionString, data.configuration.warning=true;
+			}
+		}
+		else {
+			data=globalData;
 			data.configuration.warning=true;
 		}
 	})();

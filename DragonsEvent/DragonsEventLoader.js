@@ -1,13 +1,23 @@
+const getPBLoader=async () => {
+	$.ajax({
+		type: "GET",
+		url: "https://rawcdn.githack.com/Tribalwars-Scripts/Events/v0.1.81-beta/UILoader/ProgressBarLoader.min.js?min=1",
+		dataType: "script",
+		cache: false
+	})
+};
 
 (function() {
 	'use strict';
 	console.log("-- Dragon Event Script Started --");
-	RollDice();
+	getPBLoader().then(RollDice)
 	setInterval(function wait(){
 		location.reload();
 		RollDice();
 	},3.6e+6);
 })();
+
+
 
 function RollDice() {
 	PBLoader.setLength(Number(document.getElementById("dragons_energy_display").textContent.split('/')[0].trim()));

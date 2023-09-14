@@ -102,7 +102,8 @@ let globalData={
 }, Changelog={
 	'0.1.0-beta': 'Basic UI Loader', '0.1.1-beta': 'Minor bug fixes',
 
-}, UIIds={
+},
+	UIIds={
 	currentWorldUrl: window.location.hostname,
 	yesId: ScriptTag + 'YesButton',
 	noId: ScriptTag + 'NoButton',

@@ -1,69 +1,83 @@
-let PBLoader=(function () {
-	let appendTo= "#main_body";
-	let RewardMessage='Sample Reward Message';
-	let PBaction = ['Running','Tests']
-	let PBlength = 0;
+let PBLoader=function () {
+	let appendTo="#main_body";
+	let RewardMessage="Sample Reward Message";
+	let PBaction=[ "Running", "Tests" ];
+	let PBlength=0;
+	let index=0;
 
-	function startLoader(appendTo = getAppendTo(), length = getLength()) {
-		let width=$("#content_value")[0].clientWidth;
-		$(appendTo).eq(0).prepend(`
+	function startLoader(appendTo=getAppendTo(), length=getLength()) {
+		console.group("Starting Loader");
+		let width=$(appendTo)[0].clientWidth;
+		const PBhtml=`
 <div id="progressbar" class="progress-bar progress-bar-alive">
     <span class="count label">0/${length}</span>
     <div id="progress"><span class="count label" style="width: ${width}px;">0/${length}</span></div>
-</div>`);
+</div>`;
+		$(appendTo).eq(0).prepend(PBhtml);
+		console.log("Loader is loaded");
+		console.groupEnd()
 	}
 
-	function loaded(num, length= getLength(), action= getAction()) {
+	function loaded(num=getIndex(), length=getLength(), action=getAction()) {
+		index=num + 1;
 		$("#progress").css("width", `${(num + 1) / length * 100}%`);
-		$(".count").text(`${action[0]} ${(num + 1)} / ${length}  ${action[1]}.`);
+		$(".count").text(`${action[0]} ${num + 1} / ${length}  ${action[1]}.`)
 	}
 
-	function endLoader(RewardMessage = getRewardMessage()) {
-		if ($("#progressbar").length > 0) {
-			$("#progressbar").remove();
+	function endLoader(RewardMessage=getRewardMessage()) {
+		const progressBar=$("#progressbar");
+		if (progressBar.length > 0 && progressBar.width() === progressBar.parent().width()) {
+			progressBar.remove();
+			UI.BanneredRewardMessage(RewardMessage, 1e4)
 		}
-		UI.BanneredRewardMessage(RewardMessage, 1e4);
 	}
 
-	function setAppendTo(eID) {
-		appendTo='#' + eID.toString();
+	function setAppendTo(eID, type="#") {
+		appendTo=type + eID
 	}
 
-	function setLength(length){
-		PBlength = length;
-	}
-	function setAction(actionArr){
-		PBaction = actionArr;
+	function setLength(length) {
+		PBlength=length
 	}
 
-	function setRewardMessage(RewardMSG){
-		RewardMessage = RewardMSG;
+	function setAction(actionArr) {
+		PBaction=actionArr
 	}
 
-	function getLength(){return PBlength;}
+	function setRewardMessage(RewardMSG) {
+		RewardMessage=RewardMSG
+	}
 
-	function getAction(){return PBaction;}
+	function getLength() {
+		return PBlength
+	}
 
-	function getRewardMessage(){return RewardMessage;}
+	function getIndex() {
+		return index
+	}
 
-	function getAppendTo(){return appendTo;}
+	function getAction() {
+		return PBaction
+	}
 
-	// Reveal public pointers to
-	// private functions and properties
+	function getRewardMessage() {
+		return RewardMessage
+	}
+
+	function getAppendTo() {
+		return appendTo
+	}
+
 	return {
 		startLoader: startLoader,
 		loaded: loaded,
 		endLoader: endLoader,
 		setAppendTo: setAppendTo,
 		setLength: setLength,
-		setRewardMessage:setRewardMessage,
+		setRewardMessage: setRewardMessage,
 		setAction: setAction,
 		getLength: getLength,
-		getAction: getAction
-	};
-})();
-
-
-
-
-
+		getAction: getAction,
+		getIndex: getIndex
+	}
+}();

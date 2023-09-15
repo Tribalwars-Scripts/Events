@@ -1,4 +1,81 @@
-setTimeout(run, 900)
+const unlockButtons=() => {
+	const unlockX=(ID) => {
+		document.getElementById(ID).classList.remove('btn-disabled')
+	}
+
+	const handleEventButtons=[ UIIds.setPrefsId, UIIds.resetPrefsId, UIIds.startButtonId, UIIds.setEventSettingsId ]
+	handleEventButtons.forEach(e => unlockX(e))
+	document.getElementById(UIIds.setEventSettingsId).parentElement.children[1].textContent="General " + ScriptName + " settings."
+}
+
+const resetSettings=() => {
+	const data=getLocalStorage(StorageIds.globalData)
+	if (data) {
+		data.EventSettings=null
+	}
+	printSuccess("Settings have been reset")
+}
+
+const saveSettings=() => {
+
+	const getSaved=getLocalStorage(StorageIds.globalData)
+
+	if (getSaved === globalData) {
+		printError("Nothing to save.")
+		return
+	}
+	saveLocalStorage(StorageIds.globalData, globalData);
+	printSuccess("Settings successfully saved")
+}
+
+unlockButtons();
+
+const startStopBot=() => {
+	const savedData=getLocalStorage(StorageIds.globalData)
+	savedData.running= !savedData.running;
+	document.getElementById(UIIds.startButtonId).innerText=savedData.running ? 'Stop' :'Start';
+	saveLocalStorage(StorageIds.globalData, savedData);
+	savedData.running ? start() :{}
+}
+
+document
+	.getElementById(UIIds.setEventSettingsId)
+	.addEventListener('click', async function () {
+		$.ajax({
+			type: 'GET',
+			url: 'https://rawcdn.githack.com/Tribalwars-Scripts/Events/' + ScriptVersion + '/SeasEvent/settings.min.js?min=1',
+			dataType: 'script',
+			cache: false,
+		});
+	})
+document
+	.getElementById(UIIds.resetPrefsId)
+	.addEventListener('click', async function () {
+		resetSettings();
+	})
+document
+	.getElementById(UIIds.setPrefsId)
+	.addEventListener('click', async function () {
+		saveSettings();
+	})
+
+document
+	.getElementById(UIIds.startButtonId)
+	.addEventListener('click', async function () {
+		startStopBot();
+	})
+
+
+const start=async () => {
+	const saveData=getLocalStorage(StorageIds.globalData)
+	const isStart=async () => {
+		run();
+	}
+	saveData.running ? await isStart() :{};
+}
+
+
+setTimeout(start, 5e4);
 
 function run() {
 	'use strict';
@@ -102,7 +179,7 @@ function run() {
 		return array;
 	}
 
-	function checkActiveTurn() {
+	async function checkActiveTurn() {
 		try {
 			if (parseInt(document.querySelector("#battle_container > div > div.turn-order-container > div > div.turn.active > div.active-turn-frame").parentElement.getAttribute("data-unit_id")) <= 5) {
 				setTimeout(function () {
@@ -110,7 +187,7 @@ function run() {
 				}, 200);
 			}
 			else {
-				window.location.reload();
+				await sleep(5000);
 			}
 		} catch (e) {
 			console.log(e);

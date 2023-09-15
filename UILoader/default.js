@@ -4,7 +4,7 @@ const match=EventScreen.match(regex);
 const EventName=match[0].includes('_') ? match[0].replace('_', ' ') :match[0];
 const EName=EventName.includes(' ') ? (EventName.split(' ')[0].replace(/^\w/, c => c.toUpperCase())) + " " + (EventName.split(' ')[1].replace(/^\w/, c => c.toUpperCase())) :EventName.replace(/^\w/, c => c.toUpperCase());
 const ScriptName=EName + ' Event', ScriptTag=ScriptName.replace(' ', '').replace(/^\w/, c => c.toLowerCase());
-const ScriptVersion='v0.2.0-beta';
+const ScriptVersion='v0.2.01-beta';
 
 
 /**
@@ -511,7 +511,7 @@ const getEventLoader=async () => {
 			return data;
 
 		})
-		.done(InitialPopUp)
+		.done(IPopUpCheck)
 		.catch(e => {
 			console.error("EventLoader not implemented yet. Waiting some time");
 			inProgress();
@@ -519,7 +519,8 @@ const getEventLoader=async () => {
 }
 //https://rawcdn.githack.com/Tribalwars-Scripts/Events/64b056aaa5c32e8352634e5e71cecf0677ea60e3/CaveExplorer%20Event/CaveExplorer%20EventLoader.js?_=1684958415940
 
-const InitialPopUp=() => {
+
+const IPopUpCheck = () =>{
 	(async () => {
 		let data=getLocalStorage(StorageIds.globalData);
 		if (data != null) // data exists
@@ -537,6 +538,10 @@ const InitialPopUp=() => {
 			data.configuration.warning=true;
 		}
 	})();
+	return data.configuration.warning ? true : InitialPopUp();
+}
+
+const InitialPopUp=() => {
 	let popup_HTML=`<div class="popup_box_container" id="config_popup" style="display:none;">
         <div class="popup_box show" id="popup_box_popup_command" style="width: 800px;">
             <div class="popup_box_content">

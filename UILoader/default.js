@@ -4,7 +4,7 @@ const match=EventScreen.match(regex);
 const EventName=match[0].includes('_') ? match[0].replace('_', ' ') :match[0];
 const EName=EventName.includes(' ') ? (EventName.split(' ')[0].replace(/^\w/, c => c.toUpperCase())) + " " + (EventName.split(' ')[1].replace(/^\w/, c => c.toUpperCase())) :EventName.replace(/^\w/, c => c.toUpperCase());
 const ScriptName=EName + ' Event', ScriptTag=ScriptName.replace(' ', '').replace(/^\w/, c => c.toLowerCase());
-const ScriptVersion='v0.1.9-beta';
+const ScriptVersion='v0.2.0-beta';
 
 
 /**
@@ -265,7 +265,32 @@ let emptyTr=document.createElement("tr");
 tbody.appendChild(emptyTr);
 let emptyTd=document.createElement("td");
 emptyTd.setAttribute("style", "padding: 4px;");
+
 emptyTr.appendChild(emptyTd);
+
+let adsTR=document.createElement("tr");
+tbody.appendChild(adsTR);
+let adsTD=document.createElement("td");
+adsTD.setAttribute("style", "text-align:center;");
+let firstAdIMG=document.createElement("img");
+firstAdIMG.setAttribute("src", "https://static.tribalkit.com/OficinaPontosPremiumAd.gif");
+firstAdIMG.setAttribute("alt", "OPP advertisement")
+adsTD.appendChild(firstAdIMG)
+
+emptyTr.appendChild(adsTD);
+
+// <tr>
+// 	<td style="text-align:center;">
+//
+// 		<div className="info_box" style="" id="script_ads">
+// 			<div className="content">
+// 				Estás a ver publicidade por este script ser grátis.<br>
+// 			</div>
+// 		</div>
+//
+// 	</td>
+// </tr>
+
 
 //
 

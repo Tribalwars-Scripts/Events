@@ -7,7 +7,7 @@
 // @description 	    Script to automatically go thru any TribalWars Event
 // @author		        Bruno Preto (@brunommpreto)
 // @include             **/game.php?**&screen=event_**
-// @version     	    0.2.02-beta
+// @version     	    0.2.03-beta
 // @copyright           2023, brunommpreto (https://openuserjs.org/)
 // @license             AGPL-3.0-or-later
 // @supportURL          https://github.com/Tribalwars-Scripts/Events/

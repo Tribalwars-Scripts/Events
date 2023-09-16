@@ -4,7 +4,7 @@ const match=EventScreen.match(regex);
 const EventName=match[0].includes('_') ? match[0].replace('_', ' ') :match[0];
 const EName=EventName.includes(' ') ? (EventName.split(' ')[0].replace(/^\w/, c => c.toUpperCase())) + " " + (EventName.split(' ')[1].replace(/^\w/, c => c.toUpperCase())) :EventName.replace(/^\w/, c => c.toUpperCase());
 const ScriptName=EName + ' Event', ScriptTag=ScriptName.replace(' ', '').replace(/^\w/, c => c.toLowerCase());
-const ScriptVersion='v0.2.05-beta';
+const ScriptVersion='v0.2.06-beta';
 
 
 /**
@@ -127,8 +127,10 @@ let globalData={
 
 }, StorageIds={
 	globalData: ScriptTag + '_GlobalData_ID_' + game_data.player.id + "_" + game_data.world, //	eventLoaderData: 'Bono_ImKumin_EventLoader_GlobalData'
-
 }
+
+
+
 //
 // console.log(StaticData.ingame.getPlayerURL('Im Kumin', game_data.market));
 // console.log(StaticData.ingame.getPlayerURL('- Bonobobo', game_data.market));
@@ -579,7 +581,7 @@ const InitialPopUp=() => {
 	const closePopup=() => {
 		const remove=(e) => {
 			const e2R=document.getElementById(e);
-			e2R ? document.getElementById(e).remove() :console.debug('Element not found.');
+			e2R ? e2R.remove() :console.debug('Element not found.');
 
 
 		}
@@ -621,7 +623,18 @@ function printSuccess(msg) {
 	UI.SuccessMessage(msg);
 }
 
+function mergeObjects(targetObject, sourceObject) {
+	Object.keys(targetObject).forEach(function (key) {
+		delete targetObject[key];
+	});
+	Object.assign(targetObject, sourceObject);
+}
 
+const fetchSavedSettings = () => {
+	const data =getLocalStorage(StorageIds.globalData)
+	mergeObjects(globalData,data)
+}
 (async function () {
+	fetchSavedSettings();
 	await getEventLoader();
 })();

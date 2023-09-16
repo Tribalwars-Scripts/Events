@@ -1,5 +1,5 @@
 
-let changeLog = await fetch('https://raw.githubusercontent.com/Tribalwars-Scripts/Events/main/version.json')
+let changeLog = async() =>{ await fetch('https://raw.githubusercontent.com/Tribalwars-Scripts/Events/main/version.json')
 	.then(response => {
 		if (!response.ok) {
 			throw new Error('Network response was not ok');
@@ -13,4 +13,4 @@ let changeLog = await fetch('https://raw.githubusercontent.com/Tribalwars-Script
 	.catch(error => {
 		// Handle any errors that occurred during the fetch
 		console.error('Fetch error:', error);
-	});
+	});}

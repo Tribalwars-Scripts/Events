@@ -29,7 +29,15 @@ const saveSettings = () => {
 	printSuccess("Settings successfully saved")
 }
 
+
+const updateButtons = () =>{
+	const savedData = getLocalStorage(StorageIds.globalData);
+	document.getElementById(UIIds.startButtonId).innerText = savedData.running ? 'Stop' : 'Start';
+	savedData.running ? start() : {}
+}
+
 unlockButtons();
+updateButtons();
 
 const startStopBot = () => {
 	const savedData = getLocalStorage(StorageIds.globalData);
@@ -71,6 +79,7 @@ document
 
 const start = async () => {
 	const saveData = getLocalStorage(StorageIds.globalData) || globalData;
+
 	const isStart = async () => {
 		let flag = true; //If it can proceed or not later
 			TribalWars.get(game_data.screen, {

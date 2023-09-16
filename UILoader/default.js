@@ -4,7 +4,7 @@ const match=EventScreen.match(regex);
 const EventName=match[0].includes('_') ? match[0].replace('_', ' ') :match[0];
 const EName=EventName.includes(' ') ? (EventName.split(' ')[0].replace(/^\w/, c => c.toUpperCase())) + " " + (EventName.split(' ')[1].replace(/^\w/, c => c.toUpperCase())) :EventName.replace(/^\w/, c => c.toUpperCase());
 const ScriptName=EName + ' Event', ScriptTag=ScriptName.replace(' ', '').replace(/^\w/, c => c.toLowerCase());
-const ScriptVersion='v0.2.06-beta';
+const ScriptVersion='v0.2.061-beta';
 
 
 /**
@@ -630,9 +630,21 @@ function mergeObjects(targetObject, sourceObject) {
 	Object.assign(targetObject, sourceObject);
 }
 
+
+const logger = (name, variable) =>{
+	console.group(name)
+	console.dir(variable);
+	console.groupEnd();
+}
+
+const isNull = (variable) =>{
+	return (typeof variable === 'undefined' || variable === null || typeof variable !== 'object')
+}
+
 const fetchSavedSettings = () => {
-	const data =getLocalStorage(StorageIds.globalData)
-	mergeObjects(globalData,data)
+	const data = getLocalStorage(StorageIds.globalData);
+	logger("Data From Storage in Loader", data);
+	data ? mergeObjects(globalData,data) : console.info("There is nothing saved.");
 }
 (async function () {
 	fetchSavedSettings();

@@ -2,8 +2,8 @@ const unlockButtons = () => {
 	const unlockX = (ID) => {
 		document.getElementById(ID).classList.remove('btn-disabled')
 	}
-	//UIIds.setPrefsId, cant add settings yet.
-	const handleEventButtons = [ UIIds.resetPrefsId, UIIds.startButtonId, UIIds.setEventSettingsId]
+	//UIIds.setPrefsId, UIIds.setEventSettingsId, UIIds.resetPrefsId,  cant add settings yet.
+	const handleEventButtons = [ UIIds.startButtonId ]
 	handleEventButtons.forEach(e => unlockX(e))
 	document.getElementById(UIIds.setEventSettingsId).parentElement.children[1].textContent = "General " + ScriptName + " settings."
 }
@@ -32,7 +32,7 @@ const saveSettings = () => {
 unlockButtons();
 
 const startStopBot = () => {
-	const savedData = getLocalStorage(StorageIds.globalData)
+	const savedData = getLocalStorage(StorageIds.globalData);
 	savedData.running = !savedData.running;
 	document.getElementById(UIIds.startButtonId).innerText = savedData.running ? 'Stop' : 'Start';
 	saveLocalStorage(StorageIds.globalData, savedData);
@@ -44,7 +44,7 @@ document
 	.addEventListener('click', async function() {
 		$.ajax({
 			type: 'GET',
-			url: 'https://rawcdn.githack.com/Tribalwars-Scripts/Events/' + ScriptVersion + '/SeasEvent/settings.min.js?min=1',
+			url: 'https://rawcdn.githack.com/Tribalwars-Scripts/Events/' + ScriptVersion + '/' + ScriptName +  '/settings.min.js?min=1',
 			dataType: 'script',
 			cache: false,
 		});
@@ -66,14 +66,7 @@ document
 		startStopBot();
 	})
 
-const test = () =>{
 
-}
-
-
-const isNull = (variable) =>{
-	return (typeof variable === 'undefined' || variable === null || typeof variable !== 'object')
-}
 
 
 const start = async () => {

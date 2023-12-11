@@ -4,7 +4,7 @@ const match=EventScreen.match(regex);
 const EventName=match[0].includes('_') ? match[0].replace('_', ' ') :match[0];
 const EName=EventName.includes(' ') ? (EventName.split(' ')[0].replace(/^\w/, c => c.toUpperCase())) + " " + (EventName.split(' ')[1].replace(/^\w/, c => c.toUpperCase())) :EventName.replace(/^\w/, c => c.toUpperCase());
 const ScriptName=EName + ' Event', ScriptTag=ScriptName.replace(' ', '').replace(/^\w/, c => c.toLowerCase());
-const ScriptVersion='v0.1.9-beta';
+const ScriptVersion='v0.2.05-beta';
 
 
 /**
@@ -102,8 +102,7 @@ let globalData={
 }, Changelog={
 	'0.1.0-beta': 'Basic UI Loader', '0.1.1-beta': 'Minor bug fixes',
 
-},
-	UIIds={
+}, UIIds={
 	currentWorldUrl: window.location.hostname,
 	yesId: ScriptTag + 'YesButton',
 	noId: ScriptTag + 'NoButton',
@@ -266,7 +265,33 @@ let emptyTr=document.createElement("tr");
 tbody.appendChild(emptyTr);
 let emptyTd=document.createElement("td");
 emptyTd.setAttribute("style", "padding: 4px;");
+
 emptyTr.appendChild(emptyTd);
+
+let adsTR=document.createElement("tr");
+tbody.appendChild(adsTR);
+
+let adsTD=document.createElement("td");
+adsTD.setAttribute("style", "text-align:center;");
+let firstAdIMG=document.createElement("img");
+firstAdIMG.setAttribute("src", "https://static.tribalkit.com/OficinaPontosPremiumAd.gif");
+firstAdIMG.setAttribute("alt", "OPP advertisement")
+adsTD.appendChild(firstAdIMG)
+
+adsTR.appendChild(adsTD);
+
+// <tr>
+// 	<td style="text-align:center;">
+//
+// 		<div className="info_box" style="" id="script_ads">
+// 			<div className="content">
+// 				Estás a ver publicidade por este script ser grátis.<br>
+// 			</div>
+// 		</div>
+//
+// 	</td>
+// </tr>
+
 
 //
 
@@ -487,7 +512,7 @@ const getEventLoader=async () => {
 			return data;
 
 		})
-		.done(InitialPopUp)
+		.done(IPopUpCheck)
 		.catch(e => {
 			console.error("EventLoader not implemented yet. Waiting some time");
 			inProgress();
@@ -495,7 +520,8 @@ const getEventLoader=async () => {
 }
 //https://rawcdn.githack.com/Tribalwars-Scripts/Events/64b056aaa5c32e8352634e5e71cecf0677ea60e3/CaveExplorer%20Event/CaveExplorer%20EventLoader.js?_=1684958415940
 
-const InitialPopUp=() => {
+
+const IPopUpCheck = () =>{
 	(async () => {
 		let data=getLocalStorage(StorageIds.globalData);
 		if (data != null) // data exists
@@ -513,6 +539,10 @@ const InitialPopUp=() => {
 			data.configuration.warning=true;
 		}
 	})();
+	return data.configuration.warning ? true : InitialPopUp();
+}
+
+const InitialPopUp=() => {
 	let popup_HTML=`<div class="popup_box_container" id="config_popup" style="display:none;">
         <div class="popup_box show" id="popup_box_popup_command" style="width: 800px;">
             <div class="popup_box_content">

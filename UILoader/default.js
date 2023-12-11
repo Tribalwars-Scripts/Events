@@ -4,11 +4,7 @@ const match=EventScreen.match(regex);
 const EventName=match[0].includes('_') ? match[0].replace('_', ' ') :match[0];
 const EName=EventName.includes(' ') ? (EventName.split(' ')[0].replace(/^\w/, c => c.toUpperCase())) + " " + (EventName.split(' ')[1].replace(/^\w/, c => c.toUpperCase())) :EventName.replace(/^\w/, c => c.toUpperCase());
 const ScriptName=EName + ' Event', ScriptTag=ScriptName.replace(' ', '').replace(/^\w/, c => c.toLowerCase());
-<<<<<<< HEAD
-const ScriptVersion='v0.2.05-beta';
-=======
-const ScriptVersion='v0.2.07-beta';
->>>>>>> ee29b18d230793bd2ce6229d77162c37668a05e1
+const ScriptVersion='v0.2.08-beta';
 
 
 /**

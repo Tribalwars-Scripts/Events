@@ -7,7 +7,7 @@
 // @description 	    Script to automatically go thru any TribalWars Event
 // @author		        Bruno Preto (@brunommpreto)
 // @include             **/game.php?**&screen=event_**
-// @version     	    0.2.07-beta
+// @version     	    0.2.08-beta
 // @copyright           2023, brunommpreto (https://openuserjs.org/)
 // @license             AGPL-3.0-or-later
 // @supportURL          https://github.com/Tribalwars-Scripts/Events/
@@ -24,7 +24,7 @@
 
 
 // Call the main function to set ScriptVersion and EventScreen
-const loaderVersion = 'v0.2.07-beta';
+const loaderVersion = 'v0.2.08-beta';
 const EventScreen=game_data.screen;
 const regex=/(?<=event_).*/;
 const match=EventScreen.match(regex);

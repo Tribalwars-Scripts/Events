@@ -274,31 +274,7 @@ emptyTd.setAttribute("style", "padding: 4px;");
 
 emptyTr.appendChild(emptyTd);
 
-<<<<<<< HEAD
-let adsTR=document.createElement("tr");
-tbody.appendChild(adsTR);
 
-let adsTD=document.createElement("td");
-adsTD.setAttribute("style", "text-align:center;");
-let firstAdIMG=document.createElement("img");
-firstAdIMG.setAttribute("src", "https://static.tribalkit.com/OficinaPontosPremiumAd.gif");
-firstAdIMG.setAttribute("alt", "OPP advertisement")
-adsTD.appendChild(firstAdIMG)
-
-adsTR.appendChild(adsTD);
-
-// <tr>
-// 	<td style="text-align:center;">
-//
-// 		<div className="info_box" style="" id="script_ads">
-// 			<div className="content">
-// 				Estás a ver publicidade por este script ser grátis.<br>
-// 			</div>
-// 		</div>
-//
-// 	</td>
-// </tr>
-=======
 // Create another table row for an advertisement
 const adsTR = document.createElement('tr');
 tbody.appendChild(adsTR);
@@ -308,13 +284,18 @@ const adsTD = document.createElement('td');
 adsTD.setAttribute('style', 'text-align:center;');
 adsTR.appendChild(adsTD);
 
-// Create an image element for the advertisement and set its attributes
 const firstAdIMG = document.createElement('img');
 firstAdIMG.setAttribute('src', 'https://static.tribalkit.com/OficinaPontosPremiumAd.gif');
 firstAdIMG.setAttribute('alt', 'OPP advertisement');
-adsTD.appendChild(firstAdIMG);
->>>>>>> ee29b18d230793bd2ce6229d77162c37668a05e1
 
+const OPPLink = document.createElement("a");
+OPPLink.style.color = "-webkit-link";
+OPPLink.href = "https://discord.gg/oficinadospontospremium";
+OPPLink.innerText = "Discord";
+
+OPPLink.appendChild(firstAdIMG);
+
+adsTD.appendChild(OPPLink);
 
 //
 

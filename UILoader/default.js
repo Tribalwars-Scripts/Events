@@ -4,7 +4,11 @@ const match=EventScreen.match(regex);
 const EventName=match[0].includes('_') ? match[0].replace('_', ' ') :match[0];
 const EName=EventName.includes(' ') ? (EventName.split(' ')[0].replace(/^\w/, c => c.toUpperCase())) + " " + (EventName.split(' ')[1].replace(/^\w/, c => c.toUpperCase())) :EventName.replace(/^\w/, c => c.toUpperCase());
 const ScriptName=EName + ' Event', ScriptTag=ScriptName.replace(' ', '').replace(/^\w/, c => c.toLowerCase());
+<<<<<<< HEAD
 const ScriptVersion='v0.2.05-beta';
+=======
+const ScriptVersion='v0.2.07-beta';
+>>>>>>> ee29b18d230793bd2ce6229d77162c37668a05e1
 
 
 /**
@@ -127,8 +131,10 @@ let globalData={
 
 }, StorageIds={
 	globalData: ScriptTag + '_GlobalData_ID_' + game_data.player.id + "_" + game_data.world, //	eventLoaderData: 'Bono_ImKumin_EventLoader_GlobalData'
-
 }
+
+
+
 //
 // console.log(StaticData.ingame.getPlayerURL('Im Kumin', game_data.market));
 // console.log(StaticData.ingame.getPlayerURL('- Bonobobo', game_data.market));
@@ -268,6 +274,7 @@ emptyTd.setAttribute("style", "padding: 4px;");
 
 emptyTr.appendChild(emptyTd);
 
+<<<<<<< HEAD
 let adsTR=document.createElement("tr");
 tbody.appendChild(adsTR);
 
@@ -291,6 +298,22 @@ adsTR.appendChild(adsTD);
 //
 // 	</td>
 // </tr>
+=======
+// Create another table row for an advertisement
+const adsTR = document.createElement('tr');
+tbody.appendChild(adsTR);
+
+// Create a table data cell for the advertisement with text alignment
+const adsTD = document.createElement('td');
+adsTD.setAttribute('style', 'text-align:center;');
+adsTR.appendChild(adsTD);
+
+// Create an image element for the advertisement and set its attributes
+const firstAdIMG = document.createElement('img');
+firstAdIMG.setAttribute('src', 'https://static.tribalkit.com/OficinaPontosPremiumAd.gif');
+firstAdIMG.setAttribute('alt', 'OPP advertisement');
+adsTD.appendChild(firstAdIMG);
+>>>>>>> ee29b18d230793bd2ce6229d77162c37668a05e1
 
 
 //
@@ -588,7 +611,7 @@ const InitialPopUp=() => {
 	const closePopup=() => {
 		const remove=(e) => {
 			const e2R=document.getElementById(e);
-			e2R ? document.getElementById(e).remove() :console.debug('Element not found.');
+			e2R ? e2R.remove() :console.debug('Element not found.');
 
 
 		}
@@ -630,7 +653,30 @@ function printSuccess(msg) {
 	UI.SuccessMessage(msg);
 }
 
+function mergeObjects(targetObject, sourceObject) {
+	Object.keys(targetObject).forEach(function (key) {
+		delete targetObject[key];
+	});
+	Object.assign(targetObject, sourceObject);
+}
 
+
+const logger = (name, variable) =>{
+	console.group(name)
+	console.dir(variable);
+	console.groupEnd();
+}
+
+const isNull = (variable) =>{
+	return (typeof variable === 'undefined' || variable === null || typeof variable !== 'object')
+}
+
+const fetchSavedSettings = () => {
+	const data = getLocalStorage(StorageIds.globalData);
+	logger("Data From Storage in Loader", data);
+	data ? mergeObjects(globalData,data) : console.info("There is nothing saved.");
+}
 (async function () {
+	fetchSavedSettings();
 	await getEventLoader();
 })();

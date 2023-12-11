@@ -1,0 +1,22 @@
+{
+  "0.2.0-beta": {
+    "timestamp": 1694739162,
+    "changes": "Implementation of TrumpCardEvent"
+  },
+  "0.2.01-beta": {
+    "timestamp": 1694739162,
+    "changes": "Testing Error"
+  },
+  "0.2.02-beta": {
+    "timestamp": 1694739162,
+    "changes": "Testing Error"
+  },
+  "0.2.03-beta": {
+    "timestamp": 1694739162,
+    "changes": "Implementation of timestamp versioning"
+  },
+  "0.2.04-beta": {
+    "timestamp": 1694844932,
+    "changes": "Hopefully it fixes"
+  }
+}
